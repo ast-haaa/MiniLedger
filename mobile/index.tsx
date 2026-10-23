@@ -1,7 +1,7 @@
 import { registerRootComponent } from 'expo';
 import React, { useState, useEffect } from 'react';
 import { View, ActivityIndicator, StyleSheet, Platform } from 'react-native';
-import { isAuthenticated } from './src/api';
+import { isAuthenticated, setOnUnauthorizedCallback } from './src/api';
 import LoginScreen from './app/index';
 import DashboardScreen from './app/dashboard';
 import AddLoanScreen from './app/add-loan';
@@ -13,6 +13,17 @@ export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('login');
   const [selectedLoanId, setSelectedLoanId] = useState<string | null>(null);
   const [initializing, setInitializing] = useState(true);
+
+  // Register auto-logout listener for 401 errors
+  useEffect(() => {
+    setOnUnauthorizedCallback(() => {
+      setCurrentScreen('login');
+      setSelectedLoanId(null);
+    });
+    return () => {
+      setOnUnauthorizedCallback(null);
+    };
+  }, []);
 
   // Check existing session token on launch
   useEffect(() => {

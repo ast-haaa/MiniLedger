@@ -44,12 +44,16 @@ export default function DashboardScreen({
       setLoans(loansData);
     } catch (err: any) {
       console.error('Failed to load dashboard data:', err);
+      if (err.response?.status === 401) {
+        onLogout();
+        return;
+      }
       setError('Could not connect to backend. Please check connection.');
     } finally {
       setLoading(false);
       setRefreshing(false);
     }
-  }, []);
+  }, [onLogout]);
 
   useEffect(() => {
     loadDashboardData();

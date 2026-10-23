@@ -33,6 +33,30 @@ api.interceptors.request.use(async (config) => {
   return config;
 });
 
+let onUnauthorizedCallback: (() => void) | null = null;
+
+export function setOnUnauthorizedCallback(cb: (() => void) | null) {
+  onUnauthorizedCallback = cb;
+}
+
+// Automatically clear token and redirect on 401 Unauthorized
+api.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response?.status === 401) {
+      try {
+        await logout();
+        if (onUnauthorizedCallback) {
+          onUnauthorizedCallback();
+        }
+      } catch (e) {
+        console.error('Error during auto-logout on 401:', e);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 // ==========================================
 // AUTH API
 // ==========================================
