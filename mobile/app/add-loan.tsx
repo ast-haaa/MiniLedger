@@ -10,6 +10,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import { createLoan } from '../src/api';
 
@@ -82,6 +83,7 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" />
       <KeyboardAvoidingView
         style={styles.keyboardContainer}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -89,12 +91,12 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
         <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
           {/* Header */}
           <View style={styles.header}>
-            <TouchableOpacity style={styles.backButton} onPress={onBack}>
+            <TouchableOpacity style={styles.backButton} activeOpacity={0.7} onPress={onBack}>
               <Text style={styles.backButtonText}>← Back</Text>
             </TouchableOpacity>
-            <Text style={styles.headerTitle}>Add New Loan</Text>
+            <Text style={styles.headerTitle}>Record New Loan</Text>
             <Text style={styles.headerSubtitle}>
-              Record funds lent to a friend with clear due dates
+              Keep transparent track of money lent to friends
             </Text>
           </View>
 
@@ -102,16 +104,37 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
           <View style={styles.card}>
             {error && (
               <View style={styles.errorBanner}>
+                <View style={styles.errorDot} />
                 <Text style={styles.errorText}>{error}</Text>
               </View>
             )}
 
+            {/* Prominent Amount Box */}
+            <View style={styles.amountBox}>
+              <Text style={styles.amountLabel}>AMOUNT LENT</Text>
+              <View style={styles.amountInputRow}>
+                <Text style={styles.currencySymbol}>₹</Text>
+                <TextInput
+                  style={styles.amountInput}
+                  placeholder="0"
+                  placeholderTextColor="#475569"
+                  keyboardType="decimal-pad"
+                  value={amount}
+                  onChangeText={(text) => {
+                    setAmount(text);
+                    setError(null);
+                  }}
+                  autoFocus
+                />
+              </View>
+            </View>
+
             {/* Friend Name */}
-            <Text style={styles.inputLabel}>Friend's Name *</Text>
+            <Text style={styles.inputLabel}>FRIEND'S NAME</Text>
             <TextInput
               style={styles.input}
               placeholder="e.g. Rahul Sharma"
-              placeholderTextColor="#94A3B8"
+              placeholderTextColor="#475569"
               value={friendName}
               onChangeText={(text) => {
                 setFriendName(text);
@@ -119,26 +142,12 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
               }}
             />
 
-            {/* Amount */}
-            <Text style={styles.inputLabel}>Amount (₹) *</Text>
-            <TextInput
-              style={styles.input}
-              placeholder="e.g. 5000"
-              placeholderTextColor="#94A3B8"
-              keyboardType="decimal-pad"
-              value={amount}
-              onChangeText={(text) => {
-                setAmount(text);
-                setError(null);
-              }}
-            />
-
-            {/* Due Date */}
-            <Text style={styles.inputLabel}>Due Date (YYYY-MM-DD) *</Text>
+            {/* Due Date & Quick Presets */}
+            <Text style={styles.inputLabel}>RETURN DUE DATE (YYYY-MM-DD)</Text>
             <TextInput
               style={styles.input}
               placeholder="YYYY-MM-DD"
-              placeholderTextColor="#94A3B8"
+              placeholderTextColor="#475569"
               value={dueDate}
               onChangeText={(text) => {
                 setDueDate(text);
@@ -148,21 +157,24 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
 
             {/* Quick Presets */}
             <View style={styles.presetRow}>
-              <Text style={styles.presetLabel}>Quick Presets:</Text>
+              <Text style={styles.presetLabel}>Presets:</Text>
               <TouchableOpacity
                 style={styles.presetButton}
+                activeOpacity={0.7}
                 onPress={() => handleQuickPreset(7)}
               >
                 <Text style={styles.presetButtonText}>+7 Days</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.presetButton}
+                activeOpacity={0.7}
                 onPress={() => handleQuickPreset(14)}
               >
                 <Text style={styles.presetButtonText}>+14 Days</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.presetButton}
+                activeOpacity={0.7}
                 onPress={() => handleQuickPreset(30)}
               >
                 <Text style={styles.presetButtonText}>+30 Days</Text>
@@ -170,13 +182,13 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
             </View>
 
             {/* Notes */}
-            <Text style={styles.inputLabel}>Notes (Optional)</Text>
+            <Text style={styles.inputLabel}>NOTE (OPTIONAL)</Text>
             <TextInput
               style={[styles.input, styles.textArea]}
               placeholder="e.g. Dinner bill split, trip advance"
-              placeholderTextColor="#94A3B8"
+              placeholderTextColor="#475569"
               multiline
-              numberOfLines={3}
+              numberOfLines={2}
               value={notes}
               onChangeText={setNotes}
             />
@@ -184,13 +196,14 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
             {/* Save Button */}
             <TouchableOpacity
               style={[styles.primaryButton, loading && styles.disabledButton]}
+              activeOpacity={0.85}
               onPress={handleSaveLoan}
               disabled={loading}
             >
               {loading ? (
-                <ActivityIndicator color="#FFFFFF" />
+                <ActivityIndicator color="#FFFFFF" size="small" />
               ) : (
-                <Text style={styles.primaryButtonText}>Save Loan</Text>
+                <Text style={styles.primaryButtonText}>Confirm & Save Loan</Text>
               )}
             </TouchableOpacity>
           </View>
@@ -203,13 +216,13 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F3FF', // Lavender background
+    backgroundColor: '#0B0F19',
   },
   keyboardContainer: {
     flex: 1,
   },
   scrollContent: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 18,
     paddingTop: 16,
     paddingBottom: 40,
   },
@@ -219,71 +232,117 @@ const styles = StyleSheet.create({
   backButton: {
     alignSelf: 'flex-start',
     paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 8,
-    backgroundColor: '#EDE9FE',
-    marginBottom: 12,
+    paddingHorizontal: 12,
+    borderRadius: 14,
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
+    marginBottom: 14,
   },
   backButtonText: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#6D28D9',
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#A78BFA',
   },
   headerTitle: {
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: '800',
-    color: '#0F172A',
+    color: '#F8FAFC',
     letterSpacing: -0.5,
   },
   headerSubtitle: {
-    fontSize: 14,
+    fontSize: 13,
     color: '#64748B',
     marginTop: 4,
   },
   card: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 20,
-    padding: 24,
-    shadowColor: '#1E1B4B',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.05,
-    shadowRadius: 12,
-    elevation: 3,
+    backgroundColor: '#111827',
+    borderRadius: 24,
+    padding: 22,
     borderWidth: 1,
-    borderColor: '#EDE9FE',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.4,
+    shadowRadius: 24,
+    elevation: 8,
   },
   errorBanner: {
-    backgroundColor: '#FEE2E2',
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(244, 63, 94, 0.12)',
     borderWidth: 1,
-    borderColor: '#FECACA',
-    borderRadius: 10,
-    padding: 12,
+    borderColor: 'rgba(244, 63, 94, 0.3)',
+    borderRadius: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 10,
     marginBottom: 16,
   },
+  errorDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#F43F5E',
+    marginRight: 8,
+  },
   errorText: {
-    color: '#DC2626',
-    fontSize: 13,
+    color: '#FDA4AF',
+    fontSize: 12,
     fontWeight: '500',
+    flex: 1,
+  },
+  amountBox: {
+    backgroundColor: '#0F172A',
+    borderRadius: 18,
+    padding: 16,
+    marginBottom: 18,
+    borderWidth: 1,
+    borderColor: 'rgba(139, 92, 246, 0.25)',
+  },
+  amountLabel: {
+    fontSize: 10,
+    fontWeight: '800',
+    color: '#8B5CF6',
+    letterSpacing: 1,
+    marginBottom: 6,
+  },
+  amountInputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  currencySymbol: {
+    fontSize: 28,
+    fontWeight: '800',
+    color: '#8B5CF6',
+    marginRight: 8,
+  },
+  amountInput: {
+    flex: 1,
+    fontSize: 32,
+    fontWeight: '800',
+    color: '#F8FAFC',
+    padding: 0,
   },
   inputLabel: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: '#334155',
-    marginBottom: 6,
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#64748B',
+    letterSpacing: 0.8,
+    marginBottom: 8,
   },
   input: {
     height: 48,
-    backgroundColor: '#F8FAFC',
-    borderWidth: 1.5,
-    borderColor: '#E2E8F0',
-    borderRadius: 12,
+    backgroundColor: '#0F172A',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderRadius: 14,
     paddingHorizontal: 16,
     fontSize: 15,
-    color: '#0F172A',
+    color: '#F8FAFC',
     marginBottom: 16,
   },
   textArea: {
-    height: 80,
+    height: 72,
     paddingTop: 12,
     textAlignVertical: 'top',
   },
@@ -294,41 +353,45 @@ const styles = StyleSheet.create({
     marginTop: -8,
   },
   presetLabel: {
-    fontSize: 12,
+    fontSize: 11,
     color: '#64748B',
     marginRight: 8,
+    fontWeight: '600',
   },
   presetButton: {
-    backgroundColor: '#EDE9FE',
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 6,
+    backgroundColor: 'rgba(139, 92, 246, 0.12)',
+    borderWidth: 1,
+    borderColor: 'rgba(139, 92, 246, 0.25)',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    borderRadius: 10,
     marginRight: 6,
   },
   presetButtonText: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#6D28D9',
+    color: '#DDD6FE',
   },
   primaryButton: {
     height: 50,
-    backgroundColor: '#7C3AED', // Purple button
-    borderRadius: 12,
+    backgroundColor: '#7C3AED',
+    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 8,
     shadowColor: '#7C3AED',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 3,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.35,
+    shadowRadius: 14,
+    elevation: 4,
   },
   disabledButton: {
     opacity: 0.6,
   },
   primaryButtonText: {
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: '700',
     color: '#FFFFFF',
+    letterSpacing: 0.2,
   },
 });

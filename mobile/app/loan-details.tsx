@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   ScrollView,
   SafeAreaView,
+  StatusBar,
 } from 'react-native';
 import { fetchLoanDetails, recordRepayment, LoanDetail } from '../src/api';
 
@@ -88,7 +89,7 @@ export default function LoanDetailsScreen({
       setSubmitting(true);
       await recordRepayment(loan.id, numAmount);
       setRepaymentAmount('');
-      setSuccessMsg(`Successfully recorded repayment of ₹${numAmount.toLocaleString('en-IN')}`);
+      setSuccessMsg(`Successfully recorded payment of ₹${numAmount.toLocaleString('en-IN')}`);
       await loadDetails();
       onRepaymentRecorded();
     } catch (err: any) {
@@ -101,8 +102,8 @@ export default function LoanDetailsScreen({
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#7C3AED" />
-        <Text style={styles.loadingText}>Loading loan details...</Text>
+        <ActivityIndicator size="large" color="#8B5CF6" />
+        <Text style={styles.loadingText}>Loading details...</Text>
       </View>
     );
   }
@@ -124,19 +125,20 @@ export default function LoanDetailsScreen({
 
   const isOverdue = loan.status === 'OVERDUE';
   const isRepaid = loan.status === 'REPAID';
+  const progressPercent = loan.amount > 0 ? Math.min(100, Math.round((loan.totalRepaid / loan.amount) * 100)) : 0;
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar barStyle="light-content" />
       <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         {/* Top Header */}
         <View style={styles.header}>
-          <TouchableOpacity style={styles.backButton} onPress={onBack}>
-            <Text style={styles.backButtonText}>← Back to Loans</Text>
+          <TouchableOpacity style={styles.backButton} activeOpacity={0.7} onPress={onBack}>
+            <Text style={styles.backButtonText}>← Back to Ledger</Text>
           </TouchableOpacity>
-          <Text style={styles.headerTitle}>Loan Details</Text>
         </View>
 
-        {/* Status & Loan Overview Card */}
+        {/* Hero Card */}
         <View style={[styles.card, isOverdue && styles.overdueCardBorder]}>
           <View style={styles.cardHeader}>
             <View style={styles.avatar}>
@@ -169,32 +171,39 @@ export default function LoanDetailsScreen({
 
           {loan.notes && (
             <View style={styles.notesBox}>
-              <Text style={styles.notesLabel}>Notes:</Text>
+              <Text style={styles.notesLabel}>NOTE</Text>
               <Text style={styles.notesText}>{loan.notes}</Text>
             </View>
           )}
 
-          {/* 3 Metric Breakdown */}
-          <View style={styles.metricsRow}>
-            <View style={styles.metricItem}>
-              <Text style={styles.metricLabel}>Original Amount</Text>
-              <Text style={styles.metricValue}>₹{loan.amount.toLocaleString('en-IN')}</Text>
-            </View>
-            <View style={styles.metricItem}>
-              <Text style={styles.metricLabel}>Repaid</Text>
-              <Text style={[styles.metricValue, styles.repaidValue]}>
-                ₹{loan.totalRepaid.toLocaleString('en-IN')}
-              </Text>
-            </View>
-            <View style={styles.metricItem}>
-              <Text style={styles.metricLabel}>Outstanding</Text>
-              <Text
+          {/* Outstanding Display */}
+          <View style={styles.balanceHighlight}>
+            <Text style={styles.balanceLabel}>CURRENT OUTSTANDING</Text>
+            <Text
+              style={[
+                styles.balanceAmount,
+                isOverdue && styles.amountOverdue,
+                isRepaid && styles.amountRepaid,
+              ]}
+            >
+              ₹{loan.outstanding.toLocaleString('en-IN')}
+            </Text>
+          </View>
+
+          {/* Progress Bar */}
+          <View style={styles.progressContainer}>
+            <View style={styles.progressTrack}>
+              <View
                 style={[
-                  styles.metricValue,
-                  isOverdue ? styles.overdueText : styles.outstandingText,
+                  styles.progressBarFill,
+                  { width: `${progressPercent}%` },
                 ]}
-              >
-                ₹{loan.outstanding.toLocaleString('en-IN')}
+              />
+            </View>
+            <View style={styles.progressLabelRow}>
+              <Text style={styles.progressText}>{progressPercent}% Settled</Text>
+              <Text style={styles.progressSubtext}>
+                ₹{loan.totalRepaid.toLocaleString('en-IN')} of ₹{loan.amount.toLocaleString('en-IN')}
               </Text>
             </View>
           </View>
@@ -203,13 +212,14 @@ export default function LoanDetailsScreen({
         {/* Repayment Form or Settled Banner */}
         {!isRepaid ? (
           <View style={styles.card}>
-            <Text style={styles.sectionTitle}>Record Repayment</Text>
+            <Text style={styles.sectionTitle}>Record Payment</Text>
             <Text style={styles.sectionSubtitle}>
-              Record a partial or full payment received from {loan.friendName}
+              Log payment received from {loan.friendName}
             </Text>
 
             {error && (
               <View style={styles.errorBanner}>
+                <View style={styles.errorDot} />
                 <Text style={styles.errorText}>{error}</Text>
               </View>
             )}
@@ -223,18 +233,19 @@ export default function LoanDetailsScreen({
             {/* Quick full repayment button */}
             <TouchableOpacity
               style={styles.quickPayButton}
+              activeOpacity={0.8}
               onPress={handleQuickFullRepay}
             >
               <Text style={styles.quickPayButtonText}>
-                ⚡ Pay Full Balance (₹{loan.outstanding.toLocaleString('en-IN')})
+                ⚡ Fill Full Balance (₹{loan.outstanding.toLocaleString('en-IN')})
               </Text>
             </TouchableOpacity>
 
-            <Text style={styles.inputLabel}>Repayment Amount (₹)</Text>
+            <Text style={styles.inputLabel}>REPAYMENT AMOUNT (₹)</Text>
             <TextInput
               style={styles.input}
               placeholder={`Max ₹${loan.outstanding}`}
-              placeholderTextColor="#94A3B8"
+              placeholderTextColor="#475569"
               keyboardType="decimal-pad"
               value={repaymentAmount}
               onChangeText={(text) => {
@@ -246,13 +257,14 @@ export default function LoanDetailsScreen({
 
             <TouchableOpacity
               style={[styles.primaryButton, submitting && styles.disabledButton]}
+              activeOpacity={0.85}
               onPress={handleRecordRepayment}
               disabled={submitting}
             >
               {submitting ? (
-                <ActivityIndicator color="#FFFFFF" />
+                <ActivityIndicator color="#FFFFFF" size="small" />
               ) : (
-                <Text style={styles.primaryButtonText}>Record Payment</Text>
+                <Text style={styles.primaryButtonText}>Record Repayment</Text>
               )}
             </TouchableOpacity>
           </View>
@@ -298,23 +310,23 @@ export default function LoanDetailsScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F3FF', // Lavender background
+    backgroundColor: '#0B0F19',
   },
   centerContainer: {
     flex: 1,
-    backgroundColor: '#F5F3FF',
+    backgroundColor: '#0B0F19',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
   },
   loadingText: {
     marginTop: 12,
-    fontSize: 15,
-    color: '#6D28D9',
+    fontSize: 14,
+    color: '#94A3B8',
     fontWeight: '600',
   },
   scrollContent: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 18,
     paddingTop: 16,
     paddingBottom: 40,
   },
@@ -324,37 +336,34 @@ const styles = StyleSheet.create({
   backButton: {
     alignSelf: 'flex-start',
     paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 8,
-    backgroundColor: '#EDE9FE',
+    paddingHorizontal: 12,
+    borderRadius: 14,
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
     marginBottom: 10,
   },
   backButtonText: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#6D28D9',
-  },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: '800',
-    color: '#0F172A',
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#A78BFA',
   },
   card: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 20,
+    backgroundColor: '#111827',
+    borderRadius: 22,
     padding: 20,
     marginBottom: 16,
-    shadowColor: '#1E1B4B',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 2,
     borderWidth: 1,
-    borderColor: '#EDE9FE',
+    borderColor: 'rgba(255, 255, 255, 0.08)',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.35,
+    shadowRadius: 20,
+    elevation: 4,
   },
   overdueCardBorder: {
-    borderColor: '#F87171',
-    borderWidth: 1.5,
+    borderColor: 'rgba(244, 63, 94, 0.35)',
+    backgroundColor: '#13111C',
   },
   cardHeader: {
     flexDirection: 'row',
@@ -365,7 +374,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 14,
-    backgroundColor: '#EDE9FE',
+    backgroundColor: 'rgba(139, 92, 246, 0.18)',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
@@ -373,18 +382,18 @@ const styles = StyleSheet.create({
   avatarText: {
     fontSize: 20,
     fontWeight: '800',
-    color: '#7C3AED',
+    color: '#A78BFA',
   },
   friendInfo: {
     flex: 1,
   },
   friendName: {
-    fontSize: 18,
+    fontSize: 17,
     fontWeight: '800',
-    color: '#0F172A',
+    color: '#F8FAFC',
   },
   dueDateText: {
-    fontSize: 13,
+    fontSize: 12,
     color: '#64748B',
     marginTop: 2,
   },
@@ -392,116 +401,153 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 8,
-    backgroundColor: '#EDE9FE',
+    backgroundColor: 'rgba(139, 92, 246, 0.15)',
   },
   statusBadgeOverdue: {
-    backgroundColor: '#FEE2E2',
+    backgroundColor: 'rgba(244, 63, 94, 0.15)',
   },
   statusBadgeRepaid: {
-    backgroundColor: '#D1FAE5',
+    backgroundColor: 'rgba(16, 185, 129, 0.15)',
   },
   statusBadgeText: {
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: '800',
-    color: '#6D28D9',
+    color: '#A78BFA',
   },
   statusTextOverdue: {
-    color: '#DC2626',
+    color: '#FDA4AF',
   },
   statusTextRepaid: {
-    color: '#059669',
+    color: '#6EE7B7',
   },
   notesBox: {
-    backgroundColor: '#F8FAFC',
-    borderRadius: 10,
-    padding: 10,
+    backgroundColor: '#0F172A',
+    borderRadius: 12,
+    padding: 12,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#F1F5F9',
+    borderColor: 'rgba(255, 255, 255, 0.05)',
   },
   notesLabel: {
-    fontSize: 11,
-    fontWeight: '700',
+    fontSize: 10,
+    fontWeight: '800',
     color: '#64748B',
-    textTransform: 'uppercase',
+    letterSpacing: 0.8,
   },
   notesText: {
     fontSize: 13,
-    color: '#334155',
-    marginTop: 2,
+    color: '#CBD5E1',
+    marginTop: 3,
   },
-  metricsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: '#F8FAFC',
-    borderRadius: 14,
-    padding: 14,
+  balanceHighlight: {
+    backgroundColor: '#0F172A',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.05)',
   },
-  metricItem: {
-    alignItems: 'center',
-    flex: 1,
-  },
-  metricLabel: {
-    fontSize: 11,
-    color: '#64748B',
-    fontWeight: '600',
-    textTransform: 'uppercase',
+  balanceLabel: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: '#8B5CF6',
+    letterSpacing: 1,
     marginBottom: 4,
   },
-  metricValue: {
-    fontSize: 15,
+  balanceAmount: {
+    fontSize: 28,
+    fontWeight: '900',
+    color: '#F8FAFC',
+    letterSpacing: -0.5,
+  },
+  amountOverdue: {
+    color: '#F43F5E',
+  },
+  amountRepaid: {
+    color: '#34D399',
+  },
+  progressContainer: {
+    marginTop: 4,
+  },
+  progressTrack: {
+    height: 6,
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    borderRadius: 3,
+    overflow: 'hidden',
+    marginBottom: 8,
+  },
+  progressBarFill: {
+    height: '100%',
+    backgroundColor: '#10B981',
+    borderRadius: 3,
+  },
+  progressLabelRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  progressText: {
+    fontSize: 12,
     fontWeight: '700',
-    color: '#0F172A',
+    color: '#10B981',
   },
-  repaidValue: {
-    color: '#059669',
-  },
-  outstandingText: {
-    color: '#7C3AED',
-  },
-  overdueText: {
-    color: '#DC2626',
+  progressSubtext: {
+    fontSize: 12,
+    color: '#64748B',
   },
   sectionTitle: {
-    fontSize: 17,
+    fontSize: 16,
     fontWeight: '700',
-    color: '#0F172A',
+    color: '#F8FAFC',
   },
   sectionSubtitle: {
-    fontSize: 13,
+    fontSize: 12,
     color: '#64748B',
     marginTop: 2,
-    marginBottom: 16,
+    marginBottom: 14,
   },
   errorBanner: {
-    backgroundColor: '#FEE2E2',
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(244, 63, 94, 0.12)',
     borderWidth: 1,
-    borderColor: '#FECACA',
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 14,
+    borderColor: 'rgba(244, 63, 94, 0.3)',
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    marginBottom: 12,
+  },
+  errorDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#F43F5E',
+    marginRight: 8,
   },
   errorText: {
-    color: '#DC2626',
-    fontSize: 13,
+    color: '#FDA4AF',
+    fontSize: 12,
     fontWeight: '500',
+    flex: 1,
   },
   successBanner: {
-    backgroundColor: '#ECFDF5',
+    backgroundColor: 'rgba(16, 185, 129, 0.12)',
     borderWidth: 1,
-    borderColor: '#A7F3D0',
-    borderRadius: 10,
+    borderColor: 'rgba(16, 185, 129, 0.3)',
+    borderRadius: 12,
     padding: 12,
-    marginBottom: 14,
+    marginBottom: 12,
   },
   successText: {
-    color: '#059669',
+    color: '#6EE7B7',
     fontSize: 13,
     fontWeight: '600',
   },
   quickPayButton: {
-    backgroundColor: '#EDE9FE',
-    borderRadius: 10,
+    backgroundColor: 'rgba(139, 92, 246, 0.14)',
+    borderWidth: 1,
+    borderColor: 'rgba(139, 92, 246, 0.3)',
+    borderRadius: 12,
     paddingVertical: 10,
     alignItems: 'center',
     marginBottom: 14,
@@ -509,31 +555,37 @@ const styles = StyleSheet.create({
   quickPayButtonText: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#6D28D9',
+    color: '#DDD6FE',
   },
   inputLabel: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: '#334155',
-    marginBottom: 6,
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#64748B',
+    letterSpacing: 0.8,
+    marginBottom: 8,
   },
   input: {
     height: 48,
-    backgroundColor: '#F8FAFC',
-    borderWidth: 1.5,
-    borderColor: '#E2E8F0',
-    borderRadius: 12,
+    backgroundColor: '#0F172A',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderRadius: 14,
     paddingHorizontal: 16,
     fontSize: 15,
-    color: '#0F172A',
+    color: '#F8FAFC',
     marginBottom: 16,
   },
   primaryButton: {
     height: 48,
     backgroundColor: '#7C3AED',
-    borderRadius: 12,
+    borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
+    shadowColor: '#7C3AED',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
+    elevation: 3,
   },
   disabledButton: {
     opacity: 0.6,
@@ -544,25 +596,25 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   settledCard: {
-    backgroundColor: '#F0FDF4',
-    borderColor: '#BBF7D0',
+    backgroundColor: 'rgba(16, 185, 129, 0.08)',
+    borderColor: 'rgba(16, 185, 129, 0.25)',
     alignItems: 'center',
     paddingVertical: 24,
   },
   settledTitle: {
     fontSize: 18,
     fontWeight: '800',
-    color: '#15803D',
+    color: '#34D399',
   },
   settledSubtitle: {
     fontSize: 13,
-    color: '#166534',
+    color: '#6EE7B7',
     marginTop: 4,
     textAlign: 'center',
   },
   emptyHistoryText: {
     fontSize: 13,
-    color: '#94A3B8',
+    color: '#64748B',
     marginTop: 8,
     fontStyle: 'italic',
   },
@@ -570,14 +622,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 10,
+    paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: '#F1F5F9',
+    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
   },
   historyAmount: {
     fontSize: 15,
     fontWeight: '700',
-    color: '#059669',
+    color: '#34D399',
   },
   historyDate: {
     fontSize: 12,
@@ -585,14 +637,14 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   historyBadge: {
-    backgroundColor: '#D1FAE5',
+    backgroundColor: 'rgba(16, 185, 129, 0.15)',
     paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingVertical: 3,
     borderRadius: 6,
   },
   historyBadgeText: {
-    fontSize: 11,
-    fontWeight: '700',
-    color: '#059669',
+    fontSize: 10,
+    fontWeight: '800',
+    color: '#6EE7B7',
   },
 });
