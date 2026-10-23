@@ -1,0 +1,11 @@
+{
+  "name": "miniledger",
+  "version": "1.0.0",
+  "description": "MiniLedger - Track money lent to friends",
+  "scripts": {
+    "server": "npm --prefix server run dev",
+    "mobile": "npm --prefix mobile run start",
+    "mobile:web": "npm --prefix mobile run web",
+    "test": "npm --prefix server test"
+  }
+}
