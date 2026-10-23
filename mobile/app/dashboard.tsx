@@ -10,8 +10,7 @@ import {
   SafeAreaView,
   StatusBar,
 } from 'react-native';
-import { fetchSummary, fetchLoans, logout } from '../api';
-import { Summary, Loan } from '../types';
+import { fetchSummary, fetchLoans, logout, Summary, Loan } from '../src/api';
 
 interface DashboardScreenProps {
   onNavigateAddLoan: () => void;
@@ -300,7 +299,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 24,
     fontWeight: '800',
-    color: '#0F172A',
+    color: '#0F172A', // Dark navy text
     letterSpacing: -0.5,
   },
   headerSubtitle: {
@@ -383,10 +382,10 @@ const styles = StyleSheet.create({
     color: '#7C3AED',
   },
   overdueSummaryValue: {
-    color: '#DC2626',
+    color: '#DC2626', // Red highlight for overdue
   },
   addLoanButton: {
-    backgroundColor: '#7C3AED',
+    backgroundColor: '#7C3AED', // Purple button
     borderRadius: 14,
     height: 50,
     alignItems: 'center',
@@ -439,7 +438,7 @@ const styles = StyleSheet.create({
     borderColor: '#F1F5F9',
   },
   overdueCardBorder: {
-    borderColor: '#F87171',
+    borderColor: '#F87171', // Red highlight border for overdue
     borderWidth: 1.5,
   },
   cardHeader: {
@@ -480,7 +479,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#EDE9FE',
   },
   statusBadgeOverdue: {
-    backgroundColor: '#FEE2E2',
+    backgroundColor: '#FEE2E2', // Red highlight for overdue
   },
   statusBadgeRepaid: {
     backgroundColor: '#D1FAE5',
@@ -492,7 +491,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   statusTextOverdue: {
-    color: '#DC2626',
+    color: '#DC2626', // Red text for overdue
   },
   statusTextRepaid: {
     color: '#059669',
@@ -527,7 +526,7 @@ const styles = StyleSheet.create({
     color: '#7C3AED',
   },
   outstandingOverdueText: {
-    color: '#DC2626',
+    color: '#DC2626', // Red highlight for overdue outstanding
   },
   outstandingRepaidText: {
     color: '#059669',

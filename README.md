@@ -20,17 +20,16 @@ Clean and minimal file layout with zero unnecessary abstractions:
 ```text
 miniledger/
 ├── mobile/
+│   ├── app/
+│   │   ├── index.tsx                  # Login screen (Phone & 6-digit mock OTP)
+│   │   ├── dashboard.tsx              # 4 Summary cards & loan list with overdue highlights
+│   │   ├── add-loan.tsx               # Add loan form with quick due date presets
+│   │   └── loan-details.tsx           # Breakdown, partial/full repayments, overpayment prevention
 │   ├── src/
-│   │   ├── screens/
-│   │   │   ├── LoginScreen.tsx        # Login screen (Phone & 6-digit mock OTP)
-│   │   │   ├── DashboardScreen.tsx    # 4 Summary cards & loan list with overdue highlights
-│   │   │   ├── AddLoanScreen.tsx      # Add loan form with quick due date presets
-│   │   │   └── LoanDetailsScreen.tsx  # Breakdown, partial/full repayments, overpayment prevention
 │   │   ├── types/
 │   │   │   └── index.ts               # Shared TypeScript interfaces & models
-│   │   ├── api.ts                     # Axios client & typed API service
-│   │   └── App.tsx                    # Screen router & session coordinator
-│   ├── index.tsx                      # Root component entry
+│   │   └── api.ts                     # Axios client & typed API service
+│   ├── index.tsx                      # App root router & entry point
 │   └── package.json
 │
 ├── server/

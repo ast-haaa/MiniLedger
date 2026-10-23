@@ -11,7 +11,7 @@ import {
   Platform,
   SafeAreaView,
 } from 'react-native';
-import { createLoan } from '../api';
+import { createLoan } from '../src/api';
 
 interface AddLoanScreenProps {
   onBack: () => void;
@@ -203,7 +203,7 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5F3FF',
+    backgroundColor: '#F5F3FF', // Lavender background
   },
   keyboardContainer: {
     flex: 1,
@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     height: 50,
-    backgroundColor: '#7C3AED',
+    backgroundColor: '#7C3AED', // Purple button
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',

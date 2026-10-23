@@ -9,8 +9,7 @@ import {
   ScrollView,
   SafeAreaView,
 } from 'react-native';
-import { fetchLoanDetails, recordRepayment } from '../api';
-import { LoanDetail } from '../types';
+import { fetchLoanDetails, recordRepayment, LoanDetail } from '../src/api';
 
 interface LoanDetailsScreenProps {
   loanId: string;

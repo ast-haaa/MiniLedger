@@ -10,7 +10,7 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-import { sendOtp, verifyOtp } from '../api';
+import { sendOtp, verifyOtp } from '../src/api';
 
 interface LoginScreenProps {
   onSuccess: () => void;
@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: '800',
-    color: '#0F172A',
+    color: '#0F172A', // Dark navy text
     letterSpacing: -0.5,
   },
   subtitle: {
@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     height: 50,
-    backgroundColor: '#7C3AED',
+    backgroundColor: '#7C3AED', // Purple button
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
