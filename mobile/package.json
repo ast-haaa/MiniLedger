@@ -18,6 +18,8 @@
     "typescript": "~6.0.3"
   },
   "scripts": {
+    "dev": "expo start",
+    "dev:web": "expo start --web",
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
