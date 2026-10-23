@@ -83,7 +83,7 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <KeyboardAvoidingView
         style={styles.keyboardContainer}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -117,7 +117,7 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
                 <TextInput
                   style={styles.amountInput}
                   placeholder="0"
-                  placeholderTextColor="#475569"
+                  placeholderTextColor="#94A3B8"
                   keyboardType="decimal-pad"
                   value={amount}
                   onChangeText={(text) => {
@@ -134,7 +134,7 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
             <TextInput
               style={styles.input}
               placeholder="e.g. Rahul Sharma"
-              placeholderTextColor="#475569"
+              placeholderTextColor="#94A3B8"
               value={friendName}
               onChangeText={(text) => {
                 setFriendName(text);
@@ -147,7 +147,7 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
             <TextInput
               style={styles.input}
               placeholder="YYYY-MM-DD"
-              placeholderTextColor="#475569"
+              placeholderTextColor="#94A3B8"
               value={dueDate}
               onChangeText={(text) => {
                 setDueDate(text);
@@ -186,7 +186,7 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
             <TextInput
               style={[styles.input, styles.textArea]}
               placeholder="e.g. Dinner bill split, trip advance"
-              placeholderTextColor="#475569"
+              placeholderTextColor="#94A3B8"
               multiline
               numberOfLines={2}
               value={notes}
@@ -216,7 +216,7 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#FAF5FF',
   },
   keyboardContainer: {
     flex: 1,
@@ -234,45 +234,45 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 14,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: '#EDE9FE',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: '#DDD6FE',
     marginBottom: 14,
   },
   backButtonText: {
     fontSize: 13,
-    fontWeight: '600',
-    color: '#A78BFA',
+    fontWeight: '700',
+    color: '#6D28D9',
   },
   headerTitle: {
     fontSize: 24,
     fontWeight: '800',
-    color: '#F8FAFC',
+    color: '#1E1B4B',
     letterSpacing: -0.5,
   },
   headerSubtitle: {
     fontSize: 13,
-    color: '#64748B',
+    color: '#6B7280',
     marginTop: 4,
   },
   card: {
-    backgroundColor: '#111827',
+    backgroundColor: '#FFFFFF',
     borderRadius: 24,
     padding: 22,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 12 },
-    shadowOpacity: 0.4,
-    shadowRadius: 24,
-    elevation: 8,
+    borderColor: '#F3E8FF',
+    shadowColor: '#581C87',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.06,
+    shadowRadius: 20,
+    elevation: 4,
   },
   errorBanner: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(244, 63, 94, 0.12)',
+    backgroundColor: '#FFF1F2',
     borderWidth: 1,
-    borderColor: 'rgba(244, 63, 94, 0.3)',
+    borderColor: '#FECDD3',
     borderRadius: 12,
     paddingHorizontal: 14,
     paddingVertical: 10,
@@ -282,27 +282,27 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#F43F5E',
+    backgroundColor: '#E11D48',
     marginRight: 8,
   },
   errorText: {
-    color: '#FDA4AF',
+    color: '#BE123C',
     fontSize: 12,
     fontWeight: '500',
     flex: 1,
   },
   amountBox: {
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FAF5FF',
     borderRadius: 18,
     padding: 16,
     marginBottom: 18,
-    borderWidth: 1,
-    borderColor: 'rgba(139, 92, 246, 0.25)',
+    borderWidth: 1.5,
+    borderColor: '#DDD6FE',
   },
   amountLabel: {
     fontSize: 10,
     fontWeight: '800',
-    color: '#8B5CF6',
+    color: '#7C3AED',
     letterSpacing: 1,
     marginBottom: 6,
   },
@@ -313,32 +313,32 @@ const styles = StyleSheet.create({
   currencySymbol: {
     fontSize: 28,
     fontWeight: '800',
-    color: '#8B5CF6',
+    color: '#7C3AED',
     marginRight: 8,
   },
   amountInput: {
     flex: 1,
     fontSize: 32,
     fontWeight: '800',
-    color: '#F8FAFC',
+    color: '#1E1B4B',
     padding: 0,
   },
   inputLabel: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#64748B',
+    color: '#6B7280',
     letterSpacing: 0.8,
     marginBottom: 8,
   },
   input: {
     height: 48,
-    backgroundColor: '#0F172A',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    backgroundColor: '#FDFBFD',
+    borderWidth: 1.5,
+    borderColor: '#E9D5FF',
     borderRadius: 14,
     paddingHorizontal: 16,
     fontSize: 15,
-    color: '#F8FAFC',
+    color: '#1E1B4B',
     marginBottom: 16,
   },
   textArea: {
@@ -354,14 +354,14 @@ const styles = StyleSheet.create({
   },
   presetLabel: {
     fontSize: 11,
-    color: '#64748B',
+    color: '#6B7280',
     marginRight: 8,
     fontWeight: '600',
   },
   presetButton: {
-    backgroundColor: 'rgba(139, 92, 246, 0.12)',
+    backgroundColor: '#EDE9FE',
     borderWidth: 1,
-    borderColor: 'rgba(139, 92, 246, 0.25)',
+    borderColor: '#DDD6FE',
     paddingHorizontal: 10,
     paddingVertical: 5,
     borderRadius: 10,
@@ -370,7 +370,7 @@ const styles = StyleSheet.create({
   presetButtonText: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#DDD6FE',
+    color: '#6D28D9',
   },
   primaryButton: {
     height: 50,
@@ -381,8 +381,8 @@ const styles = StyleSheet.create({
     marginTop: 8,
     shadowColor: '#7C3AED',
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.35,
-    shadowRadius: 14,
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
     elevation: 4,
   },
   disabledButton: {

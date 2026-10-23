@@ -37,7 +37,7 @@ export default function App() {
     return (
       <View style={styles.webBackdrop}>
         <View style={styles.centerContainer}>
-          <ActivityIndicator size="large" color="#8B5CF6" />
+          <ActivityIndicator size="large" color="#7C3AED" />
         </View>
       </View>
     );
@@ -112,31 +112,31 @@ export default function App() {
 const styles = StyleSheet.create({
   webBackdrop: {
     flex: 1,
-    backgroundColor: '#07090E', // Ultra-deep dark luxury backdrop
+    backgroundColor: '#F3E8FF', // Soft warm lavender backdrop for desktop web
     alignItems: 'center',
     justifyContent: 'center',
   },
   appShell: {
     flex: 1,
     width: '100%',
-    maxWidth: Platform.OS === 'web' ? 480 : undefined, // Mobile viewport width on desktop
-    backgroundColor: '#0B0F19', // Main app background
+    maxWidth: Platform.OS === 'web' ? 480 : undefined,
+    backgroundColor: '#FAF5FF', // Clean, warm light background
     ...(Platform.OS === 'web'
       ? {
-          shadowColor: '#000000',
-          shadowOffset: { width: 0, height: 12 },
-          shadowOpacity: 0.6,
+          shadowColor: '#581C87',
+          shadowOffset: { width: 0, height: 16 },
+          shadowOpacity: 0.12,
           shadowRadius: 36,
           overflow: 'hidden',
           borderLeftWidth: 1,
           borderRightWidth: 1,
-          borderColor: 'rgba(255, 255, 255, 0.06)',
+          borderColor: '#E9D5FF',
         }
       : {}),
   },
   centerContainer: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#FAF5FF',
     alignItems: 'center',
     justifyContent: 'center',
   },

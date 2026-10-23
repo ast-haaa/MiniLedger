@@ -70,7 +70,7 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
 
   return (
     <View style={styles.outerWrapper}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <KeyboardAvoidingView
         style={styles.keyboardContainer}
         behavior={Platform.OS === 'ios' ? 'padding' : undefined}
@@ -92,8 +92,8 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
               <Text style={styles.brandTagline}>Sleek & effortless peer lending tracker</Text>
             </View>
 
-            {/* Glass Card */}
-            <View style={styles.glassCard}>
+            {/* Clean Light Card */}
+            <View style={styles.card}>
               <View style={styles.cardHeader}>
                 <Text style={styles.cardTitle}>
                   {isOtpSent ? 'Verify Phone' : 'Welcome Back'}
@@ -139,7 +139,7 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
                     <TextInput
                       style={styles.phoneInput}
                       placeholder="98765 43210"
-                      placeholderTextColor="#475569"
+                      placeholderTextColor="#94A3B8"
                       keyboardType="phone-pad"
                       value={phoneNumber}
                       onChangeText={(t) => {
@@ -170,7 +170,7 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
                   <TextInput
                     style={styles.otpInput}
                     placeholder="••••••"
-                    placeholderTextColor="#334155"
+                    placeholderTextColor="#CBD5E1"
                     keyboardType="number-pad"
                     maxLength={6}
                     value={otp}
@@ -224,7 +224,7 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
 const styles = StyleSheet.create({
   outerWrapper: {
     flex: 1,
-    backgroundColor: '#090D16', // Deep Obsidian Black
+    backgroundColor: '#FAF5FF', // Warm light porcelain
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -244,7 +244,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     width: '100%',
-    maxWidth: 440, // Elegant phone container on desktop
+    maxWidth: 440,
   },
   brandHeader: {
     alignItems: 'center',
@@ -254,17 +254,17 @@ const styles = StyleSheet.create({
     width: 68,
     height: 68,
     borderRadius: 22,
-    backgroundColor: 'rgba(139, 92, 246, 0.12)',
-    borderWidth: 1,
-    borderColor: 'rgba(139, 92, 246, 0.3)',
+    backgroundColor: '#F3E8FF',
+    borderWidth: 1.5,
+    borderColor: '#DDD6FE',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 16,
-    shadowColor: '#8B5CF6',
+    shadowColor: '#7C3AED',
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.35,
+    shadowOpacity: 0.18,
     shadowRadius: 20,
-    elevation: 8,
+    elevation: 6,
   },
   logoBadge: {
     width: 52,
@@ -282,25 +282,25 @@ const styles = StyleSheet.create({
   brandName: {
     fontSize: 26,
     fontWeight: '800',
-    color: '#F8FAFC',
+    color: '#1E1B4B',
     letterSpacing: -0.5,
   },
   brandTagline: {
     fontSize: 13,
-    color: '#94A3B8',
+    color: '#6B7280',
     marginTop: 4,
   },
-  glassCard: {
-    backgroundColor: '#111827',
+  card: {
+    backgroundColor: '#FFFFFF',
     borderRadius: 24,
     padding: 24,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 16 },
-    shadowOpacity: 0.5,
-    shadowRadius: 32,
-    elevation: 10,
+    borderColor: '#F3E8FF',
+    shadowColor: '#581C87',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.08,
+    shadowRadius: 24,
+    elevation: 6,
   },
   cardHeader: {
     marginBottom: 20,
@@ -308,7 +308,7 @@ const styles = StyleSheet.create({
   cardTitle: {
     fontSize: 20,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#1E1B4B',
     letterSpacing: -0.3,
   },
   cardSubtitle: {
@@ -320,9 +320,9 @@ const styles = StyleSheet.create({
   errorBanner: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(244, 63, 94, 0.12)',
+    backgroundColor: '#FFF1F2',
     borderWidth: 1,
-    borderColor: 'rgba(244, 63, 94, 0.25)',
+    borderColor: '#FECDD3',
     borderRadius: 12,
     paddingHorizontal: 14,
     paddingVertical: 10,
@@ -332,11 +332,11 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#F43F5E',
+    backgroundColor: '#E11D48',
     marginRight: 8,
   },
   errorText: {
-    color: '#FDA4AF',
+    color: '#BE123C',
     fontSize: 12,
     fontWeight: '500',
     flex: 1,
@@ -344,9 +344,9 @@ const styles = StyleSheet.create({
   mockOtpPill: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(139, 92, 246, 0.12)',
+    backgroundColor: '#F3E8FF',
     borderWidth: 1,
-    borderColor: 'rgba(139, 92, 246, 0.3)',
+    borderColor: '#DDD6FE',
     borderRadius: 12,
     paddingHorizontal: 12,
     paddingVertical: 8,
@@ -366,16 +366,16 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   mockOtpCode: {
-    color: '#DDD6FE',
+    color: '#6D28D9',
     fontSize: 14,
     fontWeight: '800',
     letterSpacing: 2,
   },
   mockOtpAction: {
     marginLeft: 'auto',
-    color: '#A78BFA',
+    color: '#7C3AED',
     fontSize: 11,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   formSection: {
     width: '100%',
@@ -383,47 +383,47 @@ const styles = StyleSheet.create({
   inputLabel: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#64748B',
+    color: '#6B7280',
     letterSpacing: 0.8,
     marginBottom: 8,
   },
   phoneInputRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FAF5FF',
     borderRadius: 14,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderWidth: 1.5,
+    borderColor: '#E9D5FF',
     marginBottom: 18,
     overflow: 'hidden',
   },
   countryCodeBadge: {
     paddingHorizontal: 12,
     paddingVertical: 14,
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    backgroundColor: '#F3E8FF',
     borderRightWidth: 1,
-    borderRightColor: 'rgba(255, 255, 255, 0.06)',
+    borderRightColor: '#E9D5FF',
   },
   countryCodeText: {
-    color: '#94A3B8',
+    color: '#6D28D9',
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: '700',
   },
   phoneInput: {
     flex: 1,
     height: 48,
     paddingHorizontal: 14,
-    color: '#F8FAFC',
+    color: '#1E1B4B',
     fontSize: 15,
-    fontWeight: '500',
+    fontWeight: '600',
   },
   otpInput: {
     height: 52,
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FAF5FF',
     borderRadius: 14,
-    borderWidth: 1,
-    borderColor: 'rgba(139, 92, 246, 0.4)',
-    color: '#F8FAFC',
+    borderWidth: 1.5,
+    borderColor: '#7C3AED',
+    color: '#1E1B4B',
     fontSize: 24,
     fontWeight: '800',
     letterSpacing: 12,
@@ -438,7 +438,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     shadowColor: '#7C3AED',
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.35,
+    shadowOpacity: 0.25,
     shadowRadius: 12,
     elevation: 4,
   },
@@ -457,13 +457,13 @@ const styles = StyleSheet.create({
     paddingVertical: 4,
   },
   linkButtonText: {
-    color: '#A78BFA',
+    color: '#7C3AED',
     fontSize: 13,
     fontWeight: '600',
   },
   footerNote: {
     textAlign: 'center',
-    color: '#475569',
+    color: '#94A3B8',
     fontSize: 11,
     marginTop: 24,
   },

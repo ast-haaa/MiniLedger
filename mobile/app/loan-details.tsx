@@ -102,7 +102,7 @@ export default function LoanDetailsScreen({
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#8B5CF6" />
+        <ActivityIndicator size="large" color="#7C3AED" />
         <Text style={styles.loadingText}>Loading details...</Text>
       </View>
     );
@@ -129,7 +129,7 @@ export default function LoanDetailsScreen({
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
       <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
         {/* Top Header */}
         <View style={styles.header}>
@@ -245,7 +245,7 @@ export default function LoanDetailsScreen({
             <TextInput
               style={styles.input}
               placeholder={`Max ₹${loan.outstanding}`}
-              placeholderTextColor="#475569"
+              placeholderTextColor="#94A3B8"
               keyboardType="decimal-pad"
               value={repaymentAmount}
               onChangeText={(text) => {
@@ -310,11 +310,11 @@ export default function LoanDetailsScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#FAF5FF',
   },
   centerContainer: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#FAF5FF',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 24,
@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 12,
     fontSize: 14,
-    color: '#94A3B8',
+    color: '#7C3AED',
     fontWeight: '600',
   },
   scrollContent: {
@@ -338,32 +338,32 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 14,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: '#EDE9FE',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: '#DDD6FE',
     marginBottom: 10,
   },
   backButtonText: {
     fontSize: 13,
-    fontWeight: '600',
-    color: '#A78BFA',
+    fontWeight: '700',
+    color: '#6D28D9',
   },
   card: {
-    backgroundColor: '#111827',
+    backgroundColor: '#FFFFFF',
     borderRadius: 22,
     padding: 20,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.35,
-    shadowRadius: 20,
-    elevation: 4,
+    borderColor: '#F3E8FF',
+    shadowColor: '#581C87',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.05,
+    shadowRadius: 16,
+    elevation: 3,
   },
   overdueCardBorder: {
-    borderColor: 'rgba(244, 63, 94, 0.35)',
-    backgroundColor: '#13111C',
+    borderColor: '#FECDD3',
+    backgroundColor: '#FFFBFB',
   },
   cardHeader: {
     flexDirection: 'row',
@@ -374,7 +374,7 @@ const styles = StyleSheet.create({
     width: 44,
     height: 44,
     borderRadius: 14,
-    backgroundColor: 'rgba(139, 92, 246, 0.18)',
+    backgroundColor: '#F3E8FF',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
   avatarText: {
     fontSize: 20,
     fontWeight: '800',
-    color: '#A78BFA',
+    color: '#7C3AED',
   },
   friendInfo: {
     flex: 1,
@@ -390,7 +390,7 @@ const styles = StyleSheet.create({
   friendName: {
     fontSize: 17,
     fontWeight: '800',
-    color: '#F8FAFC',
+    color: '#1E1B4B',
   },
   dueDateText: {
     fontSize: 12,
@@ -401,77 +401,77 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 4,
     borderRadius: 8,
-    backgroundColor: 'rgba(139, 92, 246, 0.15)',
+    backgroundColor: '#EDE9FE',
   },
   statusBadgeOverdue: {
-    backgroundColor: 'rgba(244, 63, 94, 0.15)',
+    backgroundColor: '#FFE4E6',
   },
   statusBadgeRepaid: {
-    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+    backgroundColor: '#D1FAE5',
   },
   statusBadgeText: {
     fontSize: 10,
     fontWeight: '800',
-    color: '#A78BFA',
+    color: '#6D28D9',
   },
   statusTextOverdue: {
-    color: '#FDA4AF',
+    color: '#BE123C',
   },
   statusTextRepaid: {
-    color: '#6EE7B7',
+    color: '#065F46',
   },
   notesBox: {
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FAF5FF',
     borderRadius: 12,
     padding: 12,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.05)',
+    borderColor: '#EDE9FE',
   },
   notesLabel: {
     fontSize: 10,
     fontWeight: '800',
-    color: '#64748B',
+    color: '#6D28D9',
     letterSpacing: 0.8,
   },
   notesText: {
     fontSize: 13,
-    color: '#CBD5E1',
+    color: '#334155',
     marginTop: 3,
   },
   balanceHighlight: {
-    backgroundColor: '#0F172A',
+    backgroundColor: '#FAF5FF',
     borderRadius: 16,
     padding: 16,
     marginBottom: 16,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.05)',
+    borderWidth: 1.5,
+    borderColor: '#EDE9FE',
   },
   balanceLabel: {
     fontSize: 10,
-    fontWeight: '700',
-    color: '#8B5CF6',
+    fontWeight: '800',
+    color: '#7C3AED',
     letterSpacing: 1,
     marginBottom: 4,
   },
   balanceAmount: {
     fontSize: 28,
     fontWeight: '900',
-    color: '#F8FAFC',
+    color: '#1E1B4B',
     letterSpacing: -0.5,
   },
   amountOverdue: {
-    color: '#F43F5E',
+    color: '#E11D48',
   },
   amountRepaid: {
-    color: '#34D399',
+    color: '#059669',
   },
   progressContainer: {
     marginTop: 4,
   },
   progressTrack: {
     height: 6,
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    backgroundColor: '#F3E8FF',
     borderRadius: 3,
     overflow: 'hidden',
     marginBottom: 8,
@@ -488,8 +488,8 @@ const styles = StyleSheet.create({
   },
   progressText: {
     fontSize: 12,
-    fontWeight: '700',
-    color: '#10B981',
+    fontWeight: '800',
+    color: '#059669',
   },
   progressSubtext: {
     fontSize: 12,
@@ -498,7 +498,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#1E1B4B',
   },
   sectionSubtitle: {
     fontSize: 12,
@@ -509,9 +509,9 @@ const styles = StyleSheet.create({
   errorBanner: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(244, 63, 94, 0.12)',
+    backgroundColor: '#FFF1F2',
     borderWidth: 1,
-    borderColor: 'rgba(244, 63, 94, 0.3)',
+    borderColor: '#FECDD3',
     borderRadius: 12,
     paddingHorizontal: 12,
     paddingVertical: 10,
@@ -521,32 +521,32 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#F43F5E',
+    backgroundColor: '#E11D48',
     marginRight: 8,
   },
   errorText: {
-    color: '#FDA4AF',
+    color: '#BE123C',
     fontSize: 12,
     fontWeight: '500',
     flex: 1,
   },
   successBanner: {
-    backgroundColor: 'rgba(16, 185, 129, 0.12)',
+    backgroundColor: '#ECFDF5',
     borderWidth: 1,
-    borderColor: 'rgba(16, 185, 129, 0.3)',
+    borderColor: '#A7F3D0',
     borderRadius: 12,
     padding: 12,
     marginBottom: 12,
   },
   successText: {
-    color: '#6EE7B7',
+    color: '#047857',
     fontSize: 13,
     fontWeight: '600',
   },
   quickPayButton: {
-    backgroundColor: 'rgba(139, 92, 246, 0.14)',
+    backgroundColor: '#EDE9FE',
     borderWidth: 1,
-    borderColor: 'rgba(139, 92, 246, 0.3)',
+    borderColor: '#DDD6FE',
     borderRadius: 12,
     paddingVertical: 10,
     alignItems: 'center',
@@ -555,7 +555,7 @@ const styles = StyleSheet.create({
   quickPayButtonText: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#DDD6FE',
+    color: '#6D28D9',
   },
   inputLabel: {
     fontSize: 11,
@@ -566,13 +566,13 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 48,
-    backgroundColor: '#0F172A',
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    backgroundColor: '#FDFBFD',
+    borderWidth: 1.5,
+    borderColor: '#E9D5FF',
     borderRadius: 14,
     paddingHorizontal: 16,
     fontSize: 15,
-    color: '#F8FAFC',
+    color: '#1E1B4B',
     marginBottom: 16,
   },
   primaryButton: {
@@ -583,7 +583,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     shadowColor: '#7C3AED',
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.35,
+    shadowOpacity: 0.25,
     shadowRadius: 12,
     elevation: 3,
   },
@@ -596,25 +596,25 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
   },
   settledCard: {
-    backgroundColor: 'rgba(16, 185, 129, 0.08)',
-    borderColor: 'rgba(16, 185, 129, 0.25)',
+    backgroundColor: '#ECFDF5',
+    borderColor: '#A7F3D0',
     alignItems: 'center',
     paddingVertical: 24,
   },
   settledTitle: {
     fontSize: 18,
     fontWeight: '800',
-    color: '#34D399',
+    color: '#047857',
   },
   settledSubtitle: {
     fontSize: 13,
-    color: '#6EE7B7',
+    color: '#065F46',
     marginTop: 4,
     textAlign: 'center',
   },
   emptyHistoryText: {
     fontSize: 13,
-    color: '#64748B',
+    color: '#94A3B8',
     marginTop: 8,
     fontStyle: 'italic',
   },
@@ -624,12 +624,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 12,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
+    borderBottomColor: '#F3E8FF',
   },
   historyAmount: {
     fontSize: 15,
     fontWeight: '700',
-    color: '#34D399',
+    color: '#059669',
   },
   historyDate: {
     fontSize: 12,
@@ -637,7 +637,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
   },
   historyBadge: {
-    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+    backgroundColor: '#D1FAE5',
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 6,
@@ -645,6 +645,6 @@ const styles = StyleSheet.create({
   historyBadgeText: {
     fontSize: 10,
     fontWeight: '800',
-    color: '#6EE7B7',
+    color: '#065F46',
   },
 });

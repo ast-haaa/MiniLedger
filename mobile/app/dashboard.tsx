@@ -106,14 +106,14 @@ export default function DashboardScreen({
     }
   };
 
-  // Avatar accent colors based on initial
+  // Avatar accent colors in warm, rich light tones (NO light blue!)
   const getAvatarColor = (name: string) => {
     const colors = [
-      { bg: 'rgba(139, 92, 246, 0.18)', text: '#A78BFA' }, // Violet
-      { bg: 'rgba(56, 189, 248, 0.18)', text: '#38BDF8' }, // Sky
-      { bg: 'rgba(52, 211, 153, 0.18)', text: '#34D399' }, // Emerald
-      { bg: 'rgba(251, 146, 60, 0.18)', text: '#FB923C' }, // Orange
-      { bg: 'rgba(244, 114, 182, 0.18)', text: '#F472B6' }, // Pink
+      { bg: '#F3E8FF', text: '#7E22CE' }, // Royal Violet
+      { bg: '#D1FAE5', text: '#065F46' }, // Fresh Emerald
+      { bg: '#FFEDD5', text: '#C2410C' }, // Sunset Orange
+      { bg: '#FCE7F3', text: '#BE185D' }, // Vivid Rose
+      { bg: '#FEF3C7', text: '#B45309' }, // Warm Amber
     ];
     const charCode = name.charCodeAt(0) || 0;
     return colors[charCode % colors.length];
@@ -133,7 +133,7 @@ export default function DashboardScreen({
     return (
       <TouchableOpacity
         style={[styles.loanCard, isOverdue && styles.overdueCardHighlight]}
-        activeOpacity={0.75}
+        activeOpacity={0.8}
         onPress={() => onNavigateLoanDetails(item.id)}
       >
         <View style={styles.cardHeader}>
@@ -204,7 +204,7 @@ export default function DashboardScreen({
   if (loading && !refreshing) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#8B5CF6" />
+        <ActivityIndicator size="large" color="#7C3AED" />
         <Text style={styles.loadingText}>Syncing Ledger...</Text>
       </View>
     );
@@ -212,7 +212,7 @@ export default function DashboardScreen({
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar barStyle="light-content" />
+      <StatusBar barStyle="dark-content" />
 
       {/* Top Header Bar */}
       <View style={styles.topBar}>
@@ -248,8 +248,8 @@ export default function DashboardScreen({
           <RefreshControl
             refreshing={refreshing}
             onRefresh={handleRefresh}
-            colors={['#8B5CF6']}
-            tintColor="#8B5CF6"
+            colors={['#7C3AED']}
+            tintColor="#7C3AED"
           />
         }
         ListHeaderComponent={
@@ -261,7 +261,7 @@ export default function DashboardScreen({
               </View>
             )}
 
-            {/* UNCLUTTERED HERO FINANCIAL OVERVIEW */}
+            {/* VIBRANT ROYAL HERO CARD */}
             <View style={styles.heroCard}>
               <View style={styles.heroTopRow}>
                 <Text style={styles.heroLabel}>TOTAL OUTSTANDING</Text>
@@ -317,7 +317,7 @@ export default function DashboardScreen({
               </View>
             </View>
 
-            {/* Primary Action Button: + Add New Loan */}
+            {/* Primary Action Button: + Record New Loan */}
             <TouchableOpacity
               style={styles.addLoanButton}
               activeOpacity={0.85}
@@ -388,18 +388,18 @@ export default function DashboardScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B0F19', // Obsidian background
+    backgroundColor: '#FAF5FF', // Warm light porcelain background
   },
   centerContainer: {
     flex: 1,
-    backgroundColor: '#0B0F19',
+    backgroundColor: '#FAF5FF',
     alignItems: 'center',
     justifyContent: 'center',
   },
   loadingText: {
     marginTop: 14,
     fontSize: 14,
-    color: '#94A3B8',
+    color: '#7C3AED',
     fontWeight: '600',
   },
   topBar: {
@@ -409,8 +409,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 16,
     paddingBottom: 14,
+    backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255, 255, 255, 0.05)',
+    borderBottomColor: '#F3E8FF',
   },
   brandRow: {
     flexDirection: 'row',
@@ -424,9 +425,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 10,
-    shadowColor: '#8B5CF6',
+    shadowColor: '#7C3AED',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.25,
     shadowRadius: 8,
   },
   brandIconText: {
@@ -437,7 +438,7 @@ const styles = StyleSheet.create({
   appTitle: {
     fontSize: 18,
     fontWeight: '800',
-    color: '#F8FAFC',
+    color: '#1E1B4B',
     letterSpacing: -0.3,
   },
   liveIndicator: {
@@ -454,21 +455,21 @@ const styles = StyleSheet.create({
   },
   liveText: {
     fontSize: 11,
-    color: '#64748B',
+    color: '#6B7280',
     fontWeight: '500',
   },
   logoutPill: {
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    backgroundColor: '#F3E8FF',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
+    borderColor: '#E9D5FF',
   },
   logoutText: {
     fontSize: 12,
-    fontWeight: '600',
-    color: '#94A3B8',
+    fontWeight: '700',
+    color: '#6D28D9',
   },
   listContent: {
     paddingHorizontal: 18,
@@ -480,9 +481,9 @@ const styles = StyleSheet.create({
   errorBanner: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(244, 63, 94, 0.12)',
+    backgroundColor: '#FFF1F2',
     borderWidth: 1,
-    borderColor: 'rgba(244, 63, 94, 0.3)',
+    borderColor: '#FECDD3',
     borderRadius: 12,
     paddingHorizontal: 14,
     paddingVertical: 10,
@@ -492,27 +493,25 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#F43F5E',
+    backgroundColor: '#E11D48',
     marginRight: 8,
   },
   errorText: {
-    color: '#FDA4AF',
+    color: '#BE123C',
     fontSize: 12,
     fontWeight: '500',
     flex: 1,
   },
-  /* HERO CARD */
+  /* VIBRANT ROYAL HERO CARD */
   heroCard: {
-    backgroundColor: '#111827',
+    backgroundColor: '#7C3AED', // Rich royal violet
     borderRadius: 24,
     padding: 22,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.08)',
-    shadowColor: '#000000',
+    shadowColor: '#6D28D9',
     shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.4,
+    shadowOpacity: 0.3,
     shadowRadius: 20,
-    elevation: 6,
+    elevation: 8,
     marginBottom: 16,
   },
   heroTopRow: {
@@ -523,20 +522,20 @@ const styles = StyleSheet.create({
   },
   heroLabel: {
     fontSize: 11,
-    fontWeight: '700',
-    color: '#8B5CF6',
+    fontWeight: '800',
+    color: '#DDD6FE',
     letterSpacing: 1,
   },
   overdueBadge: {
-    backgroundColor: 'rgba(244, 63, 94, 0.15)',
+    backgroundColor: '#FFF1F2',
     borderWidth: 1,
-    borderColor: 'rgba(244, 63, 94, 0.3)',
+    borderColor: '#FECDD3',
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 8,
   },
   overdueBadgeText: {
-    color: '#F43F5E',
+    color: '#E11D48',
     fontSize: 10,
     fontWeight: '800',
     letterSpacing: 0.5,
@@ -544,7 +543,7 @@ const styles = StyleSheet.create({
   heroAmount: {
     fontSize: 34,
     fontWeight: '900',
-    color: '#F8FAFC',
+    color: '#FFFFFF',
     letterSpacing: -1,
     marginBottom: 16,
   },
@@ -553,14 +552,14 @@ const styles = StyleSheet.create({
   },
   progressTrack: {
     height: 6,
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    backgroundColor: 'rgba(255, 255, 255, 0.25)',
     borderRadius: 3,
     overflow: 'hidden',
     marginBottom: 8,
   },
   progressBarFill: {
     height: '100%',
-    backgroundColor: '#10B981',
+    backgroundColor: '#34D399', // Emerald
     borderRadius: 3,
   },
   progressLabelRow: {
@@ -570,47 +569,46 @@ const styles = StyleSheet.create({
   },
   progressText: {
     fontSize: 12,
-    fontWeight: '700',
-    color: '#10B981',
+    fontWeight: '800',
+    color: '#A7F3D0',
   },
   progressSubtext: {
     fontSize: 12,
-    color: '#64748B',
+    color: '#DDD6FE',
+    fontWeight: '500',
   },
   heroStatsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    backgroundColor: 'rgba(255, 255, 255, 0.14)',
     borderRadius: 14,
     paddingVertical: 12,
     paddingHorizontal: 16,
-    borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.04)',
   },
   heroStatItem: {
     flex: 1,
   },
   statSubLabel: {
     fontSize: 11,
-    color: '#64748B',
+    color: '#EDE9FE',
     fontWeight: '600',
     marginBottom: 2,
   },
   repaidLabel: {
-    color: '#059669',
+    color: '#A7F3D0',
   },
   statValue: {
-    fontSize: 15,
-    fontWeight: '700',
-    color: '#F8FAFC',
+    fontSize: 16,
+    fontWeight: '800',
+    color: '#FFFFFF',
   },
   repaidStatValue: {
-    color: '#34D399',
+    color: '#A7F3D0',
   },
   statDivider: {
     width: 1,
     height: 24,
-    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
     marginHorizontal: 12,
   },
   /* ACTION BUTTON */
@@ -618,21 +616,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#7C3AED',
+    backgroundColor: '#6D28D9',
     height: 50,
     borderRadius: 16,
     marginBottom: 22,
-    shadowColor: '#7C3AED',
+    shadowColor: '#6D28D9',
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.35,
-    shadowRadius: 14,
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
     elevation: 4,
   },
   plusCircle: {
     width: 22,
     height: 22,
     borderRadius: 11,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(255, 255, 255, 0.25)',
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 8,
@@ -661,18 +659,18 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 17,
     fontWeight: '800',
-    color: '#F8FAFC',
+    color: '#1E1B4B',
     letterSpacing: -0.3,
   },
   countBadge: {
     marginLeft: 8,
-    backgroundColor: 'rgba(139, 92, 246, 0.15)',
+    backgroundColor: '#EDE9FE',
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 10,
   },
   countBadgeText: {
-    color: '#A78BFA',
+    color: '#6D28D9',
     fontSize: 11,
     fontWeight: '800',
   },
@@ -683,41 +681,41 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 16,
-    backgroundColor: 'rgba(255, 255, 255, 0.04)',
+    backgroundColor: '#FFFFFF',
     marginRight: 8,
     borderWidth: 1,
-    borderColor: 'transparent',
+    borderColor: '#E9D5FF',
   },
   filterChipActive: {
-    backgroundColor: 'rgba(139, 92, 246, 0.18)',
-    borderColor: 'rgba(139, 92, 246, 0.35)',
+    backgroundColor: '#7C3AED',
+    borderColor: '#7C3AED',
   },
   filterChipText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#64748B',
+    color: '#6B7280',
   },
   filterChipTextActive: {
-    color: '#DDD6FE',
-    fontWeight: '700',
+    color: '#FFFFFF',
+    fontWeight: '800',
   },
   /* LOAN CARDS */
   loanCard: {
-    backgroundColor: '#111827',
+    backgroundColor: '#FFFFFF',
     borderRadius: 18,
     padding: 16,
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.06)',
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 8,
+    borderColor: '#F3E8FF',
+    shadowColor: '#581C87',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
     elevation: 2,
   },
   overdueCardHighlight: {
-    borderColor: 'rgba(244, 63, 94, 0.35)',
-    backgroundColor: '#13111C',
+    borderColor: '#FECDD3',
+    backgroundColor: '#FFFBFB',
   },
   cardHeader: {
     flexDirection: 'row',
@@ -741,7 +739,7 @@ const styles = StyleSheet.create({
   friendName: {
     fontSize: 15,
     fontWeight: '700',
-    color: '#F8FAFC',
+    color: '#1E1B4B',
     marginBottom: 2,
   },
   dueRow: {
@@ -750,21 +748,21 @@ const styles = StyleSheet.create({
   },
   dueText: {
     fontSize: 12,
-    color: '#94A3B8',
+    color: '#64748B',
     fontWeight: '500',
   },
   dueTextOverdue: {
-    color: '#F43F5E',
+    color: '#E11D48',
     fontWeight: '700',
   },
   dotSeparator: {
-    color: '#475569',
+    color: '#CBD5E1',
     marginHorizontal: 5,
     fontSize: 10,
   },
   dateSubtext: {
     fontSize: 11,
-    color: '#64748B',
+    color: '#94A3B8',
   },
   amountCol: {
     alignItems: 'flex-end',
@@ -772,48 +770,48 @@ const styles = StyleSheet.create({
   outstandingAmount: {
     fontSize: 16,
     fontWeight: '800',
-    color: '#A78BFA',
+    color: '#6D28D9',
     marginBottom: 4,
   },
   amountOverdue: {
-    color: '#F43F5E',
+    color: '#E11D48',
   },
   amountRepaid: {
-    color: '#34D399',
+    color: '#059669',
   },
   statusPill: {
     paddingHorizontal: 8,
     paddingVertical: 2,
     borderRadius: 6,
-    backgroundColor: 'rgba(139, 92, 246, 0.15)',
+    backgroundColor: '#EDE9FE',
   },
   statusPillOverdue: {
-    backgroundColor: 'rgba(244, 63, 94, 0.15)',
+    backgroundColor: '#FFE4E6',
   },
   statusPillRepaid: {
-    backgroundColor: 'rgba(16, 185, 129, 0.15)',
+    backgroundColor: '#D1FAE5',
   },
   statusPillText: {
     fontSize: 10,
     fontWeight: '800',
-    color: '#A78BFA',
+    color: '#6D28D9',
     letterSpacing: 0.3,
   },
   statusTextOverdue: {
-    color: '#FDA4AF',
+    color: '#BE123C',
   },
   statusTextRepaid: {
-    color: '#6EE7B7',
+    color: '#065F46',
   },
   cardNoteBox: {
     marginTop: 10,
     paddingTop: 8,
     borderTopWidth: 1,
-    borderTopColor: 'rgba(255, 255, 255, 0.04)',
+    borderTopColor: '#F3E8FF',
   },
   cardNoteText: {
     fontSize: 12,
-    color: '#64748B',
+    color: '#6B7280',
     fontStyle: 'italic',
   },
   /* EMPTY STATE */
@@ -827,7 +825,7 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 20,
-    backgroundColor: 'rgba(139, 92, 246, 0.1)',
+    backgroundColor: '#EDE9FE',
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 14,
@@ -838,7 +836,7 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 16,
     fontWeight: '700',
-    color: '#E2E8F0',
+    color: '#1E1B4B',
     marginBottom: 6,
   },
   emptySubtitle: {
