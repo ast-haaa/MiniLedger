@@ -221,12 +221,16 @@ export default function DashboardScreen({
 
       {/* Top Header Bar */}
       <View style={styles.topBar}>
-        <View style={styles.brandRow}>
+        <TouchableOpacity
+          style={styles.brandRow}
+          activeOpacity={0.7}
+          onPress={handleLogoutPress}
+        >
           <BrandLogo size={36} />
           <View style={styles.brandTextContainer}>
             <Text style={styles.appTitle}>MiniLedger</Text>
           </View>
-        </View>
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.logoutPill}
@@ -247,8 +251,8 @@ export default function DashboardScreen({
           <RefreshControl
             refreshing={refreshing}
             onRefresh={handleRefresh}
-            colors={['#7C3AED']}
-            tintColor="#7C3AED"
+            colors={['#9061F9']}
+            tintColor="#9061F9"
           />
         }
         ListHeaderComponent={
@@ -469,14 +473,14 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     flex: 1,
   },
-  /* VIBRANT ROYAL HERO CARD */
+  /* VIBRANT LIGHT VIOLET HERO CARD */
   heroCard: {
-    backgroundColor: '#7C3AED', // Rich royal violet
+    backgroundColor: '#9061F9', // Modern lighter vibrant violet
     borderRadius: 24,
     padding: 22,
-    shadowColor: '#6D28D9',
+    shadowColor: '#9061F9',
     shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.3,
+    shadowOpacity: 0.28,
     shadowRadius: 20,
     elevation: 8,
     marginBottom: 16,
@@ -583,14 +587,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#6D28D9',
+    backgroundColor: '#9061F9',
     height: 50,
     borderRadius: 16,
     marginBottom: 22,
-    shadowColor: '#6D28D9',
+    shadowColor: '#9061F9',
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
+    shadowOpacity: 0.3,
+    shadowRadius: 14,
     elevation: 4,
   },
   plusCircle: {
@@ -637,7 +641,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   countBadgeText: {
-    color: '#6D28D9',
+    color: '#7E4BD6',
     fontSize: 11,
     fontWeight: '800',
   },
@@ -654,8 +658,8 @@ const styles = StyleSheet.create({
     borderColor: '#E9D5FF',
   },
   filterChipActive: {
-    backgroundColor: '#7C3AED',
-    borderColor: '#7C3AED',
+    backgroundColor: '#9061F9',
+    borderColor: '#9061F9',
   },
   filterChipText: {
     fontSize: 12,

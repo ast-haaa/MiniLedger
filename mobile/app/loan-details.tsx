@@ -113,7 +113,7 @@ export default function LoanDetailsScreen({
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity style={styles.backButton} onPress={onBack}>
-            <Text style={styles.backButtonText}>← Back</Text>
+            <Text style={styles.backButtonText}>Back</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.centerContainer}>
@@ -134,7 +134,7 @@ export default function LoanDetailsScreen({
         {/* Top Header */}
         <View style={styles.header}>
           <TouchableOpacity style={styles.backButton} activeOpacity={0.7} onPress={onBack}>
-            <Text style={styles.backButtonText}>← Back to Ledger</Text>
+            <Text style={styles.backButtonText}>Back to Ledger</Text>
           </TouchableOpacity>
         </View>
 
@@ -322,7 +322,7 @@ const styles = StyleSheet.create({
   loadingText: {
     marginTop: 12,
     fontSize: 14,
-    color: '#7C3AED',
+    color: '#9061F9',
     fontWeight: '600',
   },
   scrollContent: {
@@ -346,7 +346,7 @@ const styles = StyleSheet.create({
   backButtonText: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#6D28D9',
+    color: '#7E4BD6',
   },
   card: {
     backgroundColor: '#FFFFFF',
@@ -355,9 +355,9 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderWidth: 1,
     borderColor: '#F3E8FF',
-    shadowColor: '#581C87',
+    shadowColor: '#9061F9',
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.05,
+    shadowOpacity: 0.08,
     shadowRadius: 16,
     elevation: 3,
   },
@@ -382,7 +382,7 @@ const styles = StyleSheet.create({
   avatarText: {
     fontSize: 20,
     fontWeight: '800',
-    color: '#7C3AED',
+    color: '#9061F9',
   },
   friendInfo: {
     flex: 1,
@@ -412,7 +412,7 @@ const styles = StyleSheet.create({
   statusBadgeText: {
     fontSize: 10,
     fontWeight: '800',
-    color: '#6D28D9',
+    color: '#7E4BD6',
   },
   statusTextOverdue: {
     color: '#BE123C',
@@ -431,7 +431,7 @@ const styles = StyleSheet.create({
   notesLabel: {
     fontSize: 10,
     fontWeight: '800',
-    color: '#6D28D9',
+    color: '#7E4BD6',
     letterSpacing: 0.8,
   },
   notesText: {
@@ -450,7 +450,7 @@ const styles = StyleSheet.create({
   balanceLabel: {
     fontSize: 10,
     fontWeight: '800',
-    color: '#7C3AED',
+    color: '#9061F9',
     letterSpacing: 1,
     marginBottom: 4,
   },
@@ -555,7 +555,7 @@ const styles = StyleSheet.create({
   quickPayButtonText: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#6D28D9',
+    color: '#7E4BD6',
   },
   inputLabel: {
     fontSize: 11,
@@ -578,14 +578,14 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     height: 48,
-    backgroundColor: '#7C3AED',
+    backgroundColor: '#9061F9',
     borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#7C3AED',
+    shadowColor: '#9061F9',
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
+    shadowOpacity: 0.3,
+    shadowRadius: 14,
     elevation: 3,
   },
   disabledButton: {

@@ -77,7 +77,7 @@ export default function App() {
     return (
       <View style={styles.webBackdrop}>
         <View style={styles.centerContainer}>
-          <ActivityIndicator size="large" color="#7C3AED" />
+          <ActivityIndicator size="large" color="#9061F9" />
         </View>
       </View>
     );
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAF5FF', // Clean, warm light background
     ...(Platform.OS === 'web'
       ? {
-          shadowColor: '#581C87',
+          shadowColor: '#9061F9',
           shadowOffset: { width: 0, height: 16 },
           shadowOpacity: 0.12,
           shadowRadius: 36,

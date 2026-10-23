@@ -1,19 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface BrandLogoProps {
   size?: number;
+  onPress?: () => void;
 }
 
 /**
- * Premium Brand Logo for MiniLedger
- * Features a modern, geometric fintech vault emblem with jewel accents.
+ * Modern Minimalist Fintech Logo for MiniLedger
+ * Features three ascending geometric ledger balance pillars inside a light violet squircle.
+ * Clicking redirects to the landing page if onPress is supplied.
  */
-export default function BrandLogo({ size = 52 }: BrandLogoProps) {
+export default function BrandLogo({ size = 52, onPress }: BrandLogoProps) {
   const borderRadius = Math.round(size * 0.28);
-  const iconSize = Math.round(size * 0.48);
+  const pillWidth = Math.max(3, Math.round(size * 0.11));
+  const pillGap = Math.max(2, Math.round(size * 0.08));
 
-  return (
+  const content = (
     <View
       style={[
         styles.outerContainer,
@@ -24,92 +27,92 @@ export default function BrandLogo({ size = 52 }: BrandLogoProps) {
         },
       ]}
     >
-      {/* Ambient background glow ring */}
+      <View style={styles.pillarGroup}>
+        {/* Left balance pillar */}
+        <View
+          style={[
+            styles.pillar,
+            {
+              width: pillWidth,
+              height: size * 0.38,
+              backgroundColor: '#DDD6FE', // Soft lilac tint
+              marginRight: pillGap,
+            },
+          ]}
+        />
+        {/* Center executive ledger pillar */}
+        <View
+          style={[
+            styles.pillar,
+            {
+              width: pillWidth,
+              height: size * 0.54,
+              backgroundColor: '#FFFFFF', // Crisp white core
+              marginRight: pillGap,
+            },
+          ]}
+        />
+        {/* Right settlement pillar */}
+        <View
+          style={[
+            styles.pillar,
+            {
+              width: pillWidth,
+              height: size * 0.44,
+              backgroundColor: '#6EE7B7', // Fresh light mint accent
+            },
+          ]}
+        />
+      </View>
+      {/* Sleek bottom baseline */}
       <View
         style={[
-          styles.innerSurface,
+          styles.baseline,
           {
-            borderRadius: borderRadius - 2,
+            width: size * 0.52,
+            height: Math.max(2, Math.round(size * 0.05)),
           },
         ]}
-      >
-        {/* Geometric Ledger Nodes */}
-        <View style={styles.emblemContainer}>
-          <View style={styles.topBar} />
-          <View style={styles.middleRow}>
-            <View style={styles.dotLeft} />
-            <Text style={[styles.currencyGlyph, { fontSize: iconSize }]}>₹</Text>
-            <View style={styles.dotRight} />
-          </View>
-          <View style={styles.bottomBar} />
-        </View>
-      </View>
+      />
     </View>
   );
+
+  if (onPress) {
+    return (
+      <TouchableOpacity activeOpacity={0.75} onPress={onPress}>
+        {content}
+      </TouchableOpacity>
+    );
+  }
+
+  return content;
 }
 
 const styles = StyleSheet.create({
   outerContainer: {
-    backgroundColor: '#7C3AED',
+    backgroundColor: '#9061F9', // Modern lighter, friendlier vibrant violet
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#6D28D9',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.35,
-    shadowRadius: 16,
-    elevation: 8,
+    shadowColor: '#9061F9',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.32,
+    shadowRadius: 14,
+    elevation: 6,
     borderWidth: 1.5,
-    borderColor: '#A78BFA',
+    borderColor: '#C4B5FD',
   },
-  innerSurface: {
-    width: '100%',
-    height: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#7C3AED',
-  },
-  emblemContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  topBar: {
-    width: '42%',
-    height: 2.5,
-    backgroundColor: '#DDD6FE',
-    borderRadius: 2,
-    marginBottom: 1,
-    opacity: 0.9,
-  },
-  middleRow: {
+  pillarGroup: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
+    marginBottom: 3,
   },
-  dotLeft: {
-    width: 3,
-    height: 3,
-    borderRadius: 1.5,
-    backgroundColor: '#FDE047', // Warm gold accent dot
-    marginRight: 2,
+  pillar: {
+    borderRadius: 99,
   },
-  currencyGlyph: {
-    color: '#FFFFFF',
-    fontWeight: '900',
-    letterSpacing: -1,
-  },
-  dotRight: {
-    width: 3,
-    height: 3,
-    borderRadius: 1.5,
-    backgroundColor: '#34D399', // Emerald accent dot
-    marginLeft: 2,
-  },
-  bottomBar: {
-    width: '56%',
-    height: 2.5,
-    backgroundColor: '#DDD6FE',
-    borderRadius: 2,
-    marginTop: 1,
-    opacity: 0.9,
+  baseline: {
+    backgroundColor: '#EDE9FE',
+    borderRadius: 99,
+    opacity: 0.85,
   },
 });

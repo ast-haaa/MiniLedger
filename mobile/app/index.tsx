@@ -93,7 +93,8 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
           <View style={styles.cardContainer}>
             {/* Ambient Brand Header */}
             <View style={styles.brandHeader}>
-              <BrandLogo size={62} />
+              <View style={styles.ambientGlow} />
+              <BrandLogo size={64} />
               <Text style={styles.brandName}>MiniLedger</Text>
               <Text style={styles.brandTagline}>Sleek & effortless peer lending tracker</Text>
             </View>
@@ -135,9 +136,9 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
               )}
 
               {!isOtpSent ? (
-                // Step 1: Phone input (Strict 10 Digits)
+                // Step 1: Phone input (Strict 10 Digits, clean column without visible counter badge)
                 <View style={styles.formSection}>
-                  <Text style={styles.inputLabel}>MOBILE NUMBER (10 DIGITS)</Text>
+                  <Text style={styles.inputLabel}>MOBILE NUMBER</Text>
                   <View style={styles.phoneInputRow}>
                     <View style={styles.countryCodeBadge}>
                       <Text style={styles.countryCodeText}>🇮🇳 +91</Text>
@@ -145,23 +146,13 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
                     <TextInput
                       style={styles.phoneInput}
                       placeholder="98765 43210"
-                      placeholderTextColor="#94A3B8"
+                      placeholderTextColor="#A0AEC0"
                       keyboardType="number-pad"
                       maxLength={10}
                       value={phoneNumber}
                       onChangeText={handlePhoneChange}
                       autoCapitalize="none"
                     />
-                    <View style={styles.digitCounterBadge}>
-                      <Text
-                        style={[
-                          styles.digitCounterText,
-                          phoneNumber.length === 10 && styles.digitCounterComplete,
-                        ]}
-                      >
-                        {phoneNumber.length === 10 ? '✓ 10' : `${phoneNumber.length}/10`}
-                      </Text>
-                    </View>
                   </View>
 
                   <TouchableOpacity
@@ -179,6 +170,10 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
                       <Text style={styles.primaryButtonText}>Send Verification Code</Text>
                     )}
                   </TouchableOpacity>
+
+                  <View style={styles.trustBadgeRow}>
+                    <Text style={styles.trustBadgeText}>🔒 Fast & secure OTP verification</Text>
+                  </View>
                 </View>
               ) : (
                 // Step 2: OTP input
@@ -260,6 +255,16 @@ const styles = StyleSheet.create({
   brandHeader: {
     alignItems: 'center',
     marginBottom: 28,
+    position: 'relative',
+  },
+  ambientGlow: {
+    position: 'absolute',
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    backgroundColor: '#EDE9FE',
+    opacity: 0.75,
+    top: -12,
   },
   brandName: {
     fontSize: 26,
@@ -275,14 +280,14 @@ const styles = StyleSheet.create({
   },
   card: {
     backgroundColor: '#FFFFFF',
-    borderRadius: 24,
-    padding: 24,
+    borderRadius: 26,
+    padding: 26,
     borderWidth: 1,
     borderColor: '#F3E8FF',
-    shadowColor: '#581C87',
-    shadowOffset: { width: 0, height: 10 },
-    shadowOpacity: 0.08,
-    shadowRadius: 24,
+    shadowColor: '#9061F9',
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.1,
+    shadowRadius: 28,
     elevation: 6,
   },
   cardHeader: {
@@ -327,7 +332,7 @@ const styles = StyleSheet.create({
   mockOtpPill: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#F3E8FF',
+    backgroundColor: '#F5F3FF',
     borderWidth: 1,
     borderColor: '#DDD6FE',
     borderRadius: 12,
@@ -336,7 +341,7 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   pillBadge: {
-    backgroundColor: '#7C3AED',
+    backgroundColor: '#9061F9',
     paddingHorizontal: 6,
     paddingVertical: 2,
     borderRadius: 6,
@@ -349,14 +354,14 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   mockOtpCode: {
-    color: '#6D28D9',
+    color: '#7E4BD6',
     fontSize: 14,
     fontWeight: '800',
     letterSpacing: 2,
   },
   mockOtpAction: {
     marginLeft: 'auto',
-    color: '#7C3AED',
+    color: '#9061F9',
     fontSize: 11,
     fontWeight: '700',
   },
@@ -388,7 +393,7 @@ const styles = StyleSheet.create({
     borderRightColor: '#E9D5FF',
   },
   countryCodeText: {
-    color: '#6D28D9',
+    color: '#7E4BD6',
     fontSize: 14,
     fontWeight: '700',
   },
@@ -401,25 +406,12 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '600',
   },
-  digitCounterBadge: {
-    paddingHorizontal: 10,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  digitCounterText: {
-    fontSize: 11,
-    fontWeight: '700',
-    color: '#94A3B8',
-  },
-  digitCounterComplete: {
-    color: '#10B981',
-  },
   otpInput: {
     height: 52,
     backgroundColor: '#FAF5FF',
     borderRadius: 14,
     borderWidth: 1.5,
-    borderColor: '#7C3AED',
+    borderColor: '#9061F9',
     color: '#1E1B4B',
     fontSize: 24,
     fontWeight: '800',
@@ -428,15 +420,15 @@ const styles = StyleSheet.create({
     marginBottom: 18,
   },
   primaryButton: {
-    height: 48,
-    backgroundColor: '#7C3AED',
-    borderRadius: 14,
+    height: 50,
+    backgroundColor: '#9061F9',
+    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#7C3AED',
+    shadowColor: '#9061F9',
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
+    shadowOpacity: 0.32,
+    shadowRadius: 14,
     elevation: 4,
   },
   disabledButton: {
@@ -448,13 +440,23 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     letterSpacing: 0.2,
   },
+  trustBadgeRow: {
+    marginTop: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  trustBadgeText: {
+    color: '#94A3B8',
+    fontSize: 11,
+    fontWeight: '500',
+  },
   linkButton: {
     alignItems: 'center',
     marginTop: 14,
     paddingVertical: 4,
   },
   linkButtonText: {
-    color: '#7C3AED',
+    color: '#9061F9',
     fontSize: 13,
     fontWeight: '600',
   },

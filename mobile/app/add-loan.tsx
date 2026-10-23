@@ -92,7 +92,7 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
           {/* Header */}
           <View style={styles.header}>
             <TouchableOpacity style={styles.backButton} activeOpacity={0.7} onPress={onBack}>
-              <Text style={styles.backButtonText}>← Back</Text>
+              <Text style={styles.backButtonText}>Back</Text>
             </TouchableOpacity>
             <Text style={styles.headerTitle}>Record New Loan</Text>
             <Text style={styles.headerSubtitle}>
@@ -247,7 +247,7 @@ const styles = StyleSheet.create({
   backButtonText: {
     fontSize: 13,
     fontWeight: '700',
-    color: '#6D28D9',
+    color: '#7E4BD6',
   },
   headerTitle: {
     fontSize: 24,
@@ -266,9 +266,9 @@ const styles = StyleSheet.create({
     padding: 22,
     borderWidth: 1,
     borderColor: '#F3E8FF',
-    shadowColor: '#581C87',
+    shadowColor: '#9061F9',
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.06,
+    shadowOpacity: 0.08,
     shadowRadius: 20,
     elevation: 4,
     width: '100%',
@@ -310,7 +310,7 @@ const styles = StyleSheet.create({
   amountLabel: {
     fontSize: 10,
     fontWeight: '800',
-    color: '#7C3AED',
+    color: '#9061F9',
     letterSpacing: 1,
     marginBottom: 6,
   },
@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
   currencySymbol: {
     fontSize: 28,
     fontWeight: '800',
-    color: '#7C3AED',
+    color: '#9061F9',
     marginRight: 8,
   },
   amountInput: {
@@ -386,19 +386,19 @@ const styles = StyleSheet.create({
   presetButtonText: {
     fontSize: 11,
     fontWeight: '700',
-    color: '#6D28D9',
+    color: '#7E4BD6',
   },
   primaryButton: {
     height: 50,
-    backgroundColor: '#7C3AED',
+    backgroundColor: '#9061F9',
     borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
     marginTop: 8,
-    shadowColor: '#7C3AED',
+    shadowColor: '#9061F9',
     shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
+    shadowOpacity: 0.32,
+    shadowRadius: 14,
     elevation: 4,
     width: '100%',
   },
