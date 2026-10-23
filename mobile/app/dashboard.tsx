@@ -11,6 +11,7 @@ import {
   StatusBar,
 } from 'react-native';
 import { fetchSummary, fetchLoans, logout, Summary, Loan } from '../src/api';
+import BrandLogo from '../src/components/BrandLogo';
 
 interface DashboardScreenProps {
   onNavigateAddLoan: () => void;
@@ -221,15 +222,9 @@ export default function DashboardScreen({
       {/* Top Header Bar */}
       <View style={styles.topBar}>
         <View style={styles.brandRow}>
-          <View style={styles.brandIcon}>
-            <Text style={styles.brandIconText}>₹</Text>
-          </View>
-          <View>
+          <BrandLogo size={36} />
+          <View style={styles.brandTextContainer}>
             <Text style={styles.appTitle}>MiniLedger</Text>
-            <View style={styles.liveIndicator}>
-              <View style={styles.pulseDot} />
-              <Text style={styles.liveText}>Peer Ledger Active</Text>
-            </View>
           </View>
         </View>
 
@@ -421,46 +416,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  brandIcon: {
-    width: 38,
-    height: 38,
-    borderRadius: 12,
-    backgroundColor: '#7C3AED',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 10,
-    shadowColor: '#7C3AED',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-  },
-  brandIconText: {
-    color: '#FFFFFF',
-    fontSize: 18,
-    fontWeight: '800',
+  brandTextContainer: {
+    marginLeft: 12,
   },
   appTitle: {
-    fontSize: 18,
+    fontSize: 19,
     fontWeight: '800',
     color: '#1E1B4B',
-    letterSpacing: -0.3,
-  },
-  liveIndicator: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 2,
-  },
-  pulseDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: '#10B981',
-    marginRight: 5,
-  },
-  liveText: {
-    fontSize: 11,
-    color: '#6B7280',
-    fontWeight: '500',
+    letterSpacing: -0.4,
   },
   logoutPill: {
     paddingHorizontal: 12,

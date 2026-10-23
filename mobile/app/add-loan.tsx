@@ -124,7 +124,6 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
                     setAmount(text);
                     setError(null);
                   }}
-                  autoFocus
                 />
               </View>
             </View>
@@ -217,22 +216,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FAF5FF',
+    width: '100%',
   },
   keyboardContainer: {
     flex: 1,
+    width: '100%',
   },
   scrollContent: {
-    paddingHorizontal: 18,
-    paddingTop: 16,
-    paddingBottom: 40,
+    paddingHorizontal: 20,
+    paddingTop: 18,
+    paddingBottom: 48,
+    width: '100%',
+    maxWidth: 480,
+    alignSelf: 'center',
   },
   header: {
     marginBottom: 20,
+    width: '100%',
   },
   backButton: {
     alignSelf: 'flex-start',
-    paddingVertical: 6,
-    paddingHorizontal: 12,
+    paddingVertical: 7,
+    paddingHorizontal: 14,
     borderRadius: 14,
     backgroundColor: '#EDE9FE',
     borderWidth: 1,
@@ -266,6 +271,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.06,
     shadowRadius: 20,
     elevation: 4,
+    width: '100%',
   },
   errorBanner: {
     flexDirection: 'row',
@@ -298,6 +304,8 @@ const styles = StyleSheet.create({
     marginBottom: 18,
     borderWidth: 1.5,
     borderColor: '#DDD6FE',
+    width: '100%',
+    overflow: 'hidden',
   },
   amountLabel: {
     fontSize: 10,
@@ -309,6 +317,8 @@ const styles = StyleSheet.create({
   amountInputRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    width: '100%',
+    overflow: 'hidden',
   },
   currencySymbol: {
     fontSize: 28,
@@ -318,10 +328,12 @@ const styles = StyleSheet.create({
   },
   amountInput: {
     flex: 1,
+    minWidth: 0,
     fontSize: 32,
     fontWeight: '800',
     color: '#1E1B4B',
     padding: 0,
+    backgroundColor: 'transparent',
   },
   inputLabel: {
     fontSize: 11,
@@ -340,6 +352,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#1E1B4B',
     marginBottom: 16,
+    width: '100%',
+    minWidth: 0,
   },
   textArea: {
     height: 72,
@@ -351,6 +365,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
     marginTop: -8,
+    flexWrap: 'wrap',
   },
   presetLabel: {
     fontSize: 11,
@@ -366,6 +381,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     borderRadius: 10,
     marginRight: 6,
+    marginBottom: 4,
   },
   presetButtonText: {
     fontSize: 11,
@@ -384,6 +400,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 12,
     elevation: 4,
+    width: '100%',
   },
   disabledButton: {
     opacity: 0.6,

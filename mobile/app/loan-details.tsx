@@ -574,6 +574,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: '#1E1B4B',
     marginBottom: 16,
+    minWidth: 0,
   },
   primaryButton: {
     height: 48,

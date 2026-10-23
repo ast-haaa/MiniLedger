@@ -12,6 +12,7 @@ import {
   StatusBar,
 } from 'react-native';
 import { sendOtp, verifyOtp } from '../src/api';
+import BrandLogo from '../src/components/BrandLogo';
 
 interface LoginScreenProps {
   onSuccess: () => void;
@@ -25,16 +26,24 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  // Strict 10-digit numeric filtering
+  const handlePhoneChange = (text: string) => {
+    const digitsOnly = text.replace(/\D/g, '').slice(0, 10);
+    setPhoneNumber(digitsOnly);
+    setErrorMessage(null);
+  };
+
   const handleSendOtp = async () => {
     setErrorMessage(null);
-    if (!phoneNumber || phoneNumber.trim().length < 8) {
-      setErrorMessage('Please enter a valid phone number (at least 8 digits)');
+    const digitsOnly = phoneNumber.replace(/\D/g, '');
+    if (digitsOnly.length !== 10) {
+      setErrorMessage('Please enter a valid 10-digit mobile number');
       return;
     }
 
     try {
       setLoading(true);
-      const res = await sendOtp(phoneNumber.trim());
+      const res = await sendOtp(`+91${digitsOnly}`);
       setIsOtpSent(true);
       if (res.mockOtp) {
         setMockOtpHint(res.mockOtp);
@@ -51,13 +60,14 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
   const handleVerifyOtp = async () => {
     setErrorMessage(null);
     if (!otp || otp.trim().length < 4) {
-      setErrorMessage('Please enter the verification code');
+      setErrorMessage('Please enter the 6-digit verification code');
       return;
     }
 
     try {
       setLoading(true);
-      await verifyOtp(phoneNumber.trim(), otp.trim());
+      const digitsOnly = phoneNumber.replace(/\D/g, '');
+      await verifyOtp(`+91${digitsOnly}`, otp.trim());
       onSuccess();
     } catch (err: any) {
       setErrorMessage(
@@ -83,11 +93,7 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
           <View style={styles.cardContainer}>
             {/* Ambient Brand Header */}
             <View style={styles.brandHeader}>
-              <View style={styles.logoRing}>
-                <View style={styles.logoBadge}>
-                  <Text style={styles.logoText}>₹</Text>
-                </View>
-              </View>
+              <BrandLogo size={62} />
               <Text style={styles.brandName}>MiniLedger</Text>
               <Text style={styles.brandTagline}>Sleek & effortless peer lending tracker</Text>
             </View>
@@ -100,8 +106,8 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
                 </Text>
                 <Text style={styles.cardSubtitle}>
                   {isOtpSent
-                    ? `Enter the 6-digit code sent to ${phoneNumber}`
-                    : 'Sign in with your phone number to access your ledger'}
+                    ? `Enter the 6-digit code sent to +91 ${phoneNumber}`
+                    : 'Sign in with your 10-digit mobile number to access your ledger'}
                 </Text>
               </View>
 
@@ -129,9 +135,9 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
               )}
 
               {!isOtpSent ? (
-                // Step 1: Phone input
+                // Step 1: Phone input (Strict 10 Digits)
                 <View style={styles.formSection}>
-                  <Text style={styles.inputLabel}>PHONE NUMBER</Text>
+                  <Text style={styles.inputLabel}>MOBILE NUMBER (10 DIGITS)</Text>
                   <View style={styles.phoneInputRow}>
                     <View style={styles.countryCodeBadge}>
                       <Text style={styles.countryCodeText}>🇮🇳 +91</Text>
@@ -140,26 +146,37 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
                       style={styles.phoneInput}
                       placeholder="98765 43210"
                       placeholderTextColor="#94A3B8"
-                      keyboardType="phone-pad"
+                      keyboardType="number-pad"
+                      maxLength={10}
                       value={phoneNumber}
-                      onChangeText={(t) => {
-                        setPhoneNumber(t);
-                        setErrorMessage(null);
-                      }}
+                      onChangeText={handlePhoneChange}
                       autoCapitalize="none"
                     />
+                    <View style={styles.digitCounterBadge}>
+                      <Text
+                        style={[
+                          styles.digitCounterText,
+                          phoneNumber.length === 10 && styles.digitCounterComplete,
+                        ]}
+                      >
+                        {phoneNumber.length === 10 ? '✓ 10' : `${phoneNumber.length}/10`}
+                      </Text>
+                    </View>
                   </View>
 
                   <TouchableOpacity
-                    style={[styles.primaryButton, loading && styles.disabledButton]}
+                    style={[
+                      styles.primaryButton,
+                      (loading || phoneNumber.length !== 10) && styles.disabledButton,
+                    ]}
                     activeOpacity={0.85}
                     onPress={handleSendOtp}
-                    disabled={loading}
+                    disabled={loading || phoneNumber.length !== 10}
                   >
                     {loading ? (
                       <ActivityIndicator color="#FFFFFF" size="small" />
                     ) : (
-                      <Text style={styles.primaryButtonText}>Send OTP Code</Text>
+                      <Text style={styles.primaryButtonText}>Send Verification Code</Text>
                     )}
                   </TouchableOpacity>
                 </View>
@@ -178,7 +195,6 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
                       setOtp(t);
                       setErrorMessage(null);
                     }}
-                    autoFocus
                   />
 
                   <TouchableOpacity
@@ -204,16 +220,11 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
                     }}
                     disabled={loading}
                   >
-                    <Text style={styles.linkButtonText}>Change phone number</Text>
+                    <Text style={styles.linkButtonText}>Change mobile number</Text>
                   </TouchableOpacity>
                 </View>
               )}
             </View>
-
-            {/* Footer */}
-            <Text style={styles.footerNote}>
-              Private • Peer-to-Peer Ledger • Offline Resilient
-            </Text>
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -250,40 +261,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 28,
   },
-  logoRing: {
-    width: 68,
-    height: 68,
-    borderRadius: 22,
-    backgroundColor: '#F3E8FF',
-    borderWidth: 1.5,
-    borderColor: '#DDD6FE',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 16,
-    shadowColor: '#7C3AED',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.18,
-    shadowRadius: 20,
-    elevation: 6,
-  },
-  logoBadge: {
-    width: 52,
-    height: 52,
-    borderRadius: 16,
-    backgroundColor: '#7C3AED',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logoText: {
-    fontSize: 26,
-    fontWeight: '800',
-    color: '#FFFFFF',
-  },
   brandName: {
     fontSize: 26,
     fontWeight: '800',
     color: '#1E1B4B',
     letterSpacing: -0.5,
+    marginTop: 14,
   },
   brandTagline: {
     fontSize: 13,
@@ -411,11 +394,25 @@ const styles = StyleSheet.create({
   },
   phoneInput: {
     flex: 1,
+    minWidth: 0,
     height: 48,
     paddingHorizontal: 14,
     color: '#1E1B4B',
     fontSize: 15,
     fontWeight: '600',
+  },
+  digitCounterBadge: {
+    paddingHorizontal: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  digitCounterText: {
+    fontSize: 11,
+    fontWeight: '700',
+    color: '#94A3B8',
+  },
+  digitCounterComplete: {
+    color: '#10B981',
   },
   otpInput: {
     height: 52,
@@ -443,7 +440,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   disabledButton: {
-    opacity: 0.6,
+    opacity: 0.5,
   },
   primaryButtonText: {
     color: '#FFFFFF',
@@ -460,11 +457,5 @@ const styles = StyleSheet.create({
     color: '#7C3AED',
     fontSize: 13,
     fontWeight: '600',
-  },
-  footerNote: {
-    textAlign: 'center',
-    color: '#94A3B8',
-    fontSize: 11,
-    marginTop: 24,
   },
 });

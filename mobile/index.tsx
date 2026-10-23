@@ -9,6 +9,35 @@ import LoanDetailsScreen from './app/loan-details';
 
 type Screen = 'login' | 'dashboard' | 'add-loan' | 'loan-details';
 
+// Inject universal web styles to eliminate default browser focus outline and horizontal scroll overflow
+if (Platform.OS === 'web' && typeof document !== 'undefined') {
+  const styleId = 'miniledger-web-reset';
+  if (!document.getElementById(styleId)) {
+    const style = document.createElement('style');
+    style.id = styleId;
+    style.textContent = `
+      * {
+        box-sizing: border-box;
+      }
+      input, textarea, select {
+        outline: none !important;
+        outline-style: none !important;
+        -webkit-tap-highlight-color: transparent;
+      }
+      input:focus, textarea:focus, select:focus {
+        outline: none !important;
+        outline-style: none !important;
+      }
+      html, body {
+        overflow-x: hidden !important;
+        margin: 0;
+        padding: 0;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('login');
   const [selectedLoanId, setSelectedLoanId] = useState<string | null>(null);
