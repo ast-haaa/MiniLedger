@@ -16,9 +16,10 @@ import BrandLogo from '../src/components/BrandLogo';
 
 interface LoginScreenProps {
   onSuccess: () => void;
+  onNavigateHome?: () => void;
 }
 
-export default function LoginScreen({ onSuccess }: LoginScreenProps) {
+export default function LoginScreen({ onSuccess, onNavigateHome }: LoginScreenProps) {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [otp, setOtp] = useState('');
   const [isOtpSent, setIsOtpSent] = useState(false);
@@ -94,7 +95,7 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
             {/* Ambient Brand Header */}
             <View style={styles.brandHeader}>
               <View style={styles.ambientGlow} />
-              <BrandLogo size={64} />
+              <BrandLogo size={64} onPress={onNavigateHome} />
               <Text style={styles.brandName}>MiniLedger</Text>
               <Text style={styles.brandTagline}>Sleek & effortless peer lending tracker</Text>
             </View>
@@ -220,6 +221,16 @@ export default function LoginScreen({ onSuccess }: LoginScreenProps) {
                 </View>
               )}
             </View>
+
+            {onNavigateHome && (
+              <TouchableOpacity
+                style={styles.backHomeBtn}
+                activeOpacity={0.75}
+                onPress={onNavigateHome}
+              >
+                <Text style={styles.backHomeText}>Back to Home</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -459,5 +470,17 @@ const styles = StyleSheet.create({
     color: '#9061F9',
     fontSize: 13,
     fontWeight: '600',
+  },
+  backHomeBtn: {
+    marginTop: 18,
+    alignSelf: 'center',
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+  },
+  backHomeText: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#7E4BD6',
   },
 });

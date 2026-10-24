@@ -2,12 +2,13 @@ import { registerRootComponent } from 'expo';
 import React, { useState, useEffect } from 'react';
 import { View, ActivityIndicator, StyleSheet, Platform } from 'react-native';
 import { isAuthenticated, setOnUnauthorizedCallback } from './src/api';
+import HomeScreen from './app/home';
 import LoginScreen from './app/index';
 import DashboardScreen from './app/dashboard';
 import AddLoanScreen from './app/add-loan';
 import LoanDetailsScreen from './app/loan-details';
 
-type Screen = 'login' | 'dashboard' | 'add-loan' | 'loan-details';
+type Screen = 'home' | 'login' | 'dashboard' | 'add-loan' | 'loan-details';
 
 // Inject universal web styles to eliminate default browser focus outline and horizontal scroll overflow
 if (Platform.OS === 'web' && typeof document !== 'undefined') {
@@ -39,9 +40,9 @@ if (Platform.OS === 'web' && typeof document !== 'undefined') {
 }
 
 export default function App() {
-  const [currentScreen, setCurrentScreen] = useState<Screen>('login');
+  const [currentScreen, setCurrentScreen] = useState<Screen>('home');
   const [selectedLoanId, setSelectedLoanId] = useState<string | null>(null);
-  const [initializing, setInitializing] = useState(true);
+  const [initializing, setInitializing] = useState(false);
 
   // Register auto-logout listener for 401 errors
   useEffect(() => {
@@ -52,25 +53,6 @@ export default function App() {
     return () => {
       setOnUnauthorizedCallback(null);
     };
-  }, []);
-
-  // Check existing session token on launch
-  useEffect(() => {
-    async function checkAuth() {
-      try {
-        const authed = await isAuthenticated();
-        if (authed) {
-          setCurrentScreen('dashboard');
-        } else {
-          setCurrentScreen('login');
-        }
-      } catch {
-        setCurrentScreen('login');
-      } finally {
-        setInitializing(false);
-      }
-    }
-    checkAuth();
   }, []);
 
   if (initializing) {
@@ -84,12 +66,24 @@ export default function App() {
   }
 
   // Navigation handlers
+  const handleOpenDashboard = () => {
+    setCurrentScreen('dashboard');
+  };
+
+  const handleNavigateLogin = () => {
+    setCurrentScreen('login');
+  };
+
+  const handleNavigateHome = () => {
+    setCurrentScreen('home');
+  };
+
   const handleLoginSuccess = () => {
     setCurrentScreen('dashboard');
   };
 
   const handleLogout = () => {
-    setCurrentScreen('login');
+    setCurrentScreen('home');
     setSelectedLoanId(null);
   };
 
@@ -108,12 +102,29 @@ export default function App() {
 
   const renderScreen = () => {
     switch (currentScreen) {
+      case 'home':
+        return (
+          <HomeScreen
+            onOpenDashboard={handleOpenDashboard}
+            onNavigateLogin={handleNavigateLogin}
+          />
+        );
+
+      case 'login':
+        return (
+          <LoginScreen
+            onSuccess={handleLoginSuccess}
+            onNavigateHome={handleNavigateHome}
+          />
+        );
+
       case 'dashboard':
         return (
           <DashboardScreen
             onNavigateAddLoan={handleNavigateAddLoan}
             onNavigateLoanDetails={handleNavigateLoanDetails}
             onLogout={handleLogout}
+            onNavigateHome={handleNavigateHome}
           />
         );
 
@@ -134,9 +145,13 @@ export default function App() {
           />
         );
 
-      case 'login':
       default:
-        return <LoginScreen onSuccess={handleLoginSuccess} />;
+        return (
+          <HomeScreen
+            onOpenDashboard={handleOpenDashboard}
+            onNavigateLogin={handleNavigateLogin}
+          />
+        );
     }
   };
 

@@ -17,6 +17,7 @@ interface DashboardScreenProps {
   onNavigateAddLoan: () => void;
   onNavigateLoanDetails: (loanId: string) => void;
   onLogout: () => void;
+  onNavigateHome?: () => void;
 }
 
 type FilterType = 'ALL' | 'PENDING' | 'OVERDUE' | 'REPAID';
@@ -25,6 +26,7 @@ export default function DashboardScreen({
   onNavigateAddLoan,
   onNavigateLoanDetails,
   onLogout,
+  onNavigateHome,
 }: DashboardScreenProps) {
   const [summary, setSummary] = useState<Summary | null>(null);
   const [loans, setLoans] = useState<Loan[]>([]);
@@ -224,7 +226,7 @@ export default function DashboardScreen({
         <TouchableOpacity
           style={styles.brandRow}
           activeOpacity={0.7}
-          onPress={handleLogoutPress}
+          onPress={onNavigateHome || handleLogoutPress}
         >
           <BrandLogo size={36} />
           <View style={styles.brandTextContainer}>
