@@ -47,7 +47,7 @@ export default function HomeScreen({
       {/* Top Navbar */}
       <View style={styles.topBar}>
         <View style={styles.brandRow}>
-          <BrandLogo size={28} />
+          <BrandLogo size={32} />
           <View style={styles.brandTextCol}>
             <Text style={styles.brandTitle}>MiniLedger</Text>
             <Text style={styles.brandSub}>Peer Ledger</Text>
@@ -106,7 +106,7 @@ export default function HomeScreen({
             <Image
               source={require('../assets/hero.jpg')}
               style={styles.heroImage}
-              resizeMode="cover"
+              resizeMode="contain"
             />
           </View>
 
@@ -150,7 +150,7 @@ export default function HomeScreen({
 
           {/* Footer */}
           <View style={styles.footer}>
-            <BrandLogo size={18} />
+            <BrandLogo size={22} />
             <Text style={styles.footerBrand}>MiniLedger</Text>
             <Text style={styles.footerText}>
               Built for seamless peer ledger tracking · Private & reliable
@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingVertical: 10,
     backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
     borderBottomColor: '#EDE9FE',
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
   },
   brandTitle: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '800',
     color: '#0F172A',
     letterSpacing: -0.3,
@@ -197,101 +197,102 @@ const styles = StyleSheet.create({
     letterSpacing: 0.2,
   },
   navLoginBtn: {
-    paddingHorizontal: 10,
-    paddingVertical: 4,
-    borderRadius: 14,
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    borderRadius: 16,
     backgroundColor: '#F3E8FF',
     borderWidth: 1,
     borderColor: '#E9D5FF',
   },
   navLoginText: {
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: '700',
     color: '#7E4BD6',
   },
   scrollContent: {
-    flexGrow: 1,
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingTop: 8,
-    paddingBottom: 10,
+    paddingTop: 10,
+    paddingBottom: 20,
   },
   mainColumn: {
     width: '100%',
-    maxWidth: 380,
+    maxWidth: 390,
     alignItems: 'center',
   },
   brandKicker: {
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: '700',
     color: '#7E4BD6',
     letterSpacing: 0.4,
-    marginBottom: 2,
+    marginBottom: 4,
     textAlign: 'center',
   },
   heroHeadline: {
-    fontSize: 19,
+    fontSize: 21,
     fontWeight: '900',
     color: '#0F172A',
     textAlign: 'center',
-    lineHeight: 24,
-    letterSpacing: -0.4,
-    marginBottom: 4,
-    maxWidth: 330,
+    lineHeight: 27,
+    letterSpacing: -0.5,
+    marginBottom: 6,
+    maxWidth: 340,
   },
   heroDescription: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '500',
     color: '#64748B',
     textAlign: 'center',
-    lineHeight: 16,
-    marginBottom: 8,
-    maxWidth: 310,
+    lineHeight: 18,
+    marginBottom: 12,
+    maxWidth: 330,
   },
   getStartedBtn: {
     width: '100%',
-    height: 40,
+    height: 46,
     backgroundColor: '#9061F9',
-    borderRadius: 12,
+    borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#9061F9',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.22,
+    shadowOpacity: 0.25,
     shadowRadius: 10,
     elevation: 3,
-    marginBottom: 4,
+    marginBottom: 6,
   },
   btnDisabled: {
     opacity: 0.7,
   },
   getStartedBtnText: {
-    fontSize: 14,
+    fontSize: 15,
     fontWeight: '800',
     color: '#FFFFFF',
     letterSpacing: 0.3,
   },
   heroNote: {
-    fontSize: 10,
+    fontSize: 11,
     color: '#94A3B8',
     fontWeight: '500',
     textAlign: 'center',
-    marginBottom: 8,
+    marginBottom: 12,
   },
   heroImageContainer: {
     width: '100%',
-    height: 140,
-    borderRadius: 14,
+    height: 165,
+    borderRadius: 16,
     overflow: 'hidden',
-    marginBottom: 8,
+    marginBottom: 12,
     borderWidth: 1,
     borderColor: '#E9D5FF',
     shadowColor: '#9061F9',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.1,
-    shadowRadius: 10,
+    shadowRadius: 12,
     elevation: 2,
     backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   heroImage: {
     width: '100%',
@@ -300,58 +301,58 @@ const styles = StyleSheet.create({
   previewCard: {
     width: '100%',
     backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-    padding: 10,
+    borderRadius: 16,
+    padding: 13,
     borderWidth: 1,
     borderColor: '#EDE9FE',
     shadowColor: '#9061F9',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.05,
-    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.06,
+    shadowRadius: 10,
     elevation: 2,
-    marginBottom: 8,
+    marginBottom: 14,
   },
   previewHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: 4,
+    marginBottom: 6,
   },
   previewLabel: {
-    fontSize: 9,
+    fontSize: 10,
     fontWeight: '700',
     color: '#7E4BD6',
     letterSpacing: 0.5,
-    marginBottom: 1,
+    marginBottom: 2,
   },
   previewAmount: {
-    fontSize: 19,
+    fontSize: 22,
     fontWeight: '900',
     color: '#0F172A',
     letterSpacing: -0.4,
   },
   previewSubtext: {
-    fontSize: 10,
+    fontSize: 11,
     color: '#64748B',
     fontWeight: '500',
   },
   previewStatusChip: {
     backgroundColor: '#D1FAE5',
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    borderRadius: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 10,
   },
   previewStatusText: {
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: '700',
     color: '#065F46',
   },
   previewProgressTrack: {
-    height: 4,
+    height: 5,
     backgroundColor: '#F3E8FF',
     borderRadius: 2,
     overflow: 'hidden',
-    marginBottom: 6,
+    marginBottom: 8,
   },
   previewProgressFill: {
     height: '100%',
@@ -362,7 +363,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 6,
+    paddingTop: 8,
     borderTopWidth: 1,
     borderTopColor: '#F1F5F9',
   },
@@ -372,34 +373,35 @@ const styles = StyleSheet.create({
   },
   previewStatDivider: {
     width: 1,
-    height: 16,
+    height: 18,
     backgroundColor: '#E2E8F0',
   },
   previewStatLabel: {
-    fontSize: 9,
+    fontSize: 10,
     color: '#64748B',
     fontWeight: '600',
-    marginBottom: 1,
+    marginBottom: 2,
   },
   previewStatVal: {
-    fontSize: 12,
+    fontSize: 13,
     fontWeight: '800',
     color: '#0F172A',
   },
   footer: {
     alignItems: 'center',
-    paddingTop: 2,
+    paddingTop: 4,
+    paddingBottom: 16,
     width: '100%',
   },
   footerBrand: {
-    fontSize: 11,
+    fontSize: 12,
     fontWeight: '800',
     color: '#0F172A',
-    marginTop: 2,
-    marginBottom: 1,
+    marginTop: 3,
+    marginBottom: 2,
   },
   footerText: {
-    fontSize: 10,
+    fontSize: 11,
     color: '#94A3B8',
     textAlign: 'center',
   },
