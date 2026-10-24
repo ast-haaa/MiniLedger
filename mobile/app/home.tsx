@@ -7,6 +7,7 @@ import {
   ScrollView,
   StatusBar,
   ActivityIndicator,
+  Image,
 } from 'react-native';
 import BrandLogo from '../src/components/BrandLogo';
 import { isAuthenticated } from '../src/api';
@@ -46,7 +47,7 @@ export default function HomeScreen({
       {/* Top Navbar */}
       <View style={styles.topBar}>
         <View style={styles.brandRow}>
-          <BrandLogo size={38} />
+          <BrandLogo size={36} />
           <View style={styles.brandTextCol}>
             <Text style={styles.brandTitle}>MiniLedger</Text>
             <Text style={styles.brandSub}>Peer Ledger</Text>
@@ -66,15 +67,25 @@ export default function HomeScreen({
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
       >
-        {/* Hero Section */}
-        <View style={styles.heroSection}>
+        {/* Balanced Centered Main Column */}
+        <View style={styles.mainColumn}>
+          {/* Hero Illustration */}
+          <View style={styles.heroImageContainer}>
+            <Image
+              source={require('../assets/hero.jpg')}
+              style={styles.heroImage}
+              resizeMode="cover"
+            />
+          </View>
+
+          {/* Hero Headline with 2-line optical balance */}
           <Text style={styles.heroHeadline}>
-            Never lose track of money lent to friends.
+            Never lose track of{'\n'}money lent to friends.
           </Text>
 
           {/* Primary Action Button: Get Started */}
           <TouchableOpacity
-            style={[styles.openDashboardBtn, checkingAuth && styles.btnDisabled]}
+            style={[styles.getStartedBtn, checkingAuth && styles.btnDisabled]}
             activeOpacity={0.85}
             onPress={handleOpenDashboardPress}
             disabled={checkingAuth}
@@ -82,17 +93,16 @@ export default function HomeScreen({
             {checkingAuth ? (
               <ActivityIndicator color="#FFFFFF" size="small" />
             ) : (
-              <Text style={styles.openDashboardBtnText}>Get Started</Text>
+              <Text style={styles.getStartedBtnText}>Get Started</Text>
             )}
           </TouchableOpacity>
 
+          {/* Trust Note */}
           <Text style={styles.heroNote}>
             Fast phone login • Zero password hassle
           </Text>
-        </View>
 
-        {/* Live Preview Card */}
-        <View style={styles.previewCardWrapper}>
+          {/* Live Preview Card */}
           <View style={styles.previewCard}>
             <View style={styles.previewHeader}>
               <View>
@@ -128,15 +138,15 @@ export default function HomeScreen({
               </View>
             </View>
           </View>
-        </View>
 
-        {/* Footer */}
-        <View style={styles.footer}>
-          <BrandLogo size={28} />
-          <Text style={styles.footerBrand}>MiniLedger</Text>
-          <Text style={styles.footerText}>
-            Built for seamless peer ledger tracking • Private & reliable
-          </Text>
+          {/* Footer */}
+          <View style={styles.footer}>
+            <BrandLogo size={26} />
+            <Text style={styles.footerBrand}>MiniLedger</Text>
+            <Text style={styles.footerText}>
+              Built for seamless peer ledger tracking • Private & reliable
+            </Text>
+          </View>
         </View>
       </ScrollView>
     </View>
@@ -146,7 +156,7 @@ export default function HomeScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FAF5FF', // Clean, warm light lavender porcelain
+    backgroundColor: '#FAF5FF', // Clean, warm light porcelain
   },
   topBar: {
     flexDirection: 'row',
@@ -191,111 +201,80 @@ const styles = StyleSheet.create({
     color: '#7E4BD6',
   },
   scrollContent: {
+    flexGrow: 1,
+    alignItems: 'center',
     paddingHorizontal: 20,
-    paddingTop: 28,
-    paddingBottom: 48,
+    paddingTop: 20,
+    paddingBottom: 40,
   },
-  heroSection: {
+  mainColumn: {
+    width: '100%',
+    maxWidth: 400,
     alignItems: 'center',
-    marginBottom: 28,
   },
-  badgePill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#EDE9FE',
-    paddingHorizontal: 12,
-    paddingVertical: 5,
-    borderRadius: 20,
-    marginBottom: 16,
+  heroImageContainer: {
+    width: '100%',
+    height: 190,
+    borderRadius: 22,
+    overflow: 'hidden',
+    marginBottom: 20,
     borderWidth: 1,
-    borderColor: '#DDD6FE',
+    borderColor: '#E9D5FF',
+    shadowColor: '#9061F9',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.16,
+    shadowRadius: 18,
+    elevation: 4,
+    backgroundColor: '#F5F3FF',
   },
-  badgeDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: '#9061F9',
-    marginRight: 7,
-  },
-  badgeText: {
-    fontSize: 11,
-    fontWeight: '700',
-    color: '#7E4BD6',
-    letterSpacing: 0.6,
+  heroImage: {
+    width: '100%',
+    height: '100%',
   },
   heroHeadline: {
-    fontSize: 30,
+    fontSize: 26,
     fontWeight: '900',
     color: '#0F172A',
     textAlign: 'center',
-    lineHeight: 38,
-    letterSpacing: -0.8,
-    marginBottom: 12,
+    lineHeight: 34,
+    letterSpacing: -0.6,
+    marginBottom: 18,
   },
-  heroSubtext: {
-    fontSize: 15,
-    color: '#64748B',
-    textAlign: 'center',
-    lineHeight: 22,
-    marginBottom: 26,
-    maxWidth: 380,
-  },
-  openDashboardBtn: {
+  getStartedBtn: {
     width: '100%',
-    maxWidth: 360,
-    height: 54,
+    height: 52,
     backgroundColor: '#9061F9',
     borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: '#9061F9',
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.35,
-    shadowRadius: 18,
+    shadowOpacity: 0.32,
+    shadowRadius: 16,
     elevation: 5,
-    marginBottom: 12,
+    marginBottom: 10,
   },
   btnDisabled: {
     opacity: 0.7,
   },
-  btnContentRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  openDashboardBtnText: {
-    fontSize: 17,
+  getStartedBtnText: {
+    fontSize: 16,
     fontWeight: '800',
     color: '#FFFFFF',
-    letterSpacing: 0.2,
-  },
-  btnArrowBadge: {
-    marginLeft: 10,
-    width: 26,
-    height: 26,
-    borderRadius: 13,
-    backgroundColor: 'rgba(255, 255, 255, 0.25)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  btnArrowText: {
-    color: '#FFFFFF',
-    fontSize: 15,
-    fontWeight: '800',
-    lineHeight: 18,
+    letterSpacing: 0.3,
   },
   heroNote: {
     fontSize: 12,
     color: '#94A3B8',
     fontWeight: '500',
-  },
-  previewCardWrapper: {
-    marginBottom: 32,
+    textAlign: 'center',
+    marginBottom: 22,
   },
   previewCard: {
+    width: '100%',
     backgroundColor: '#FFFFFF',
     borderRadius: 20,
-    padding: 20,
+    padding: 18,
     borderWidth: 1,
     borderColor: '#EDE9FE',
     shadowColor: '#9061F9',
@@ -303,12 +282,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 16,
     elevation: 3,
+    marginBottom: 28,
   },
   previewHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: 14,
+    marginBottom: 12,
   },
   previewLabel: {
     fontSize: 11,
@@ -318,7 +298,7 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   previewAmount: {
-    fontSize: 26,
+    fontSize: 24,
     fontWeight: '900',
     color: '#0F172A',
     letterSpacing: -0.5,
@@ -339,7 +319,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F3E8FF',
     borderRadius: 4,
     overflow: 'hidden',
-    marginBottom: 16,
+    marginBottom: 14,
   },
   previewProgressFill: {
     height: '100%',
@@ -374,56 +354,10 @@ const styles = StyleSheet.create({
     fontWeight: '800',
     color: '#0F172A',
   },
-  featuresSection: {
-    marginBottom: 32,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: '800',
-    color: '#0F172A',
-    marginBottom: 16,
-    letterSpacing: -0.3,
-  },
-  featureCard: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 16,
-    marginBottom: 12,
-    borderWidth: 1,
-    borderColor: '#EDE9FE',
-  },
-  featureIconBox: {
-    width: 44,
-    height: 44,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginRight: 14,
-  },
-  featureIcon: {
-    fontSize: 20,
-  },
-  featureTextCol: {
-    flex: 1,
-  },
-  featureTitle: {
-    fontSize: 15,
-    fontWeight: '700',
-    color: '#0F172A',
-    marginBottom: 4,
-  },
-  featureDesc: {
-    fontSize: 13,
-    color: '#64748B',
-    lineHeight: 18,
-  },
   footer: {
     alignItems: 'center',
-    paddingTop: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#EDE9FE',
+    paddingTop: 8,
+    width: '100%',
   },
   footerBrand: {
     fontSize: 14,
