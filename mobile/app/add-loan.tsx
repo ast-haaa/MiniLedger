@@ -223,8 +223,8 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
               onChangeText={setNotes}
             />
 
-            {/* Receipt Photo Upload (Bonus) */}
-            <Text style={styles.inputLabel}>RECEIPT PHOTO (OPTIONAL BONUS)</Text>
+            {/* Receipt Photo Upload */}
+            <Text style={styles.inputLabel}>RECEIPT PHOTO (OPTIONAL)</Text>
             {receiptImage ? (
               <View style={styles.receiptPreviewBox}>
                 <Image source={{ uri: receiptImage }} style={styles.receiptThumbnail} />

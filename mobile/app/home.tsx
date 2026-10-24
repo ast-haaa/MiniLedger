@@ -58,7 +58,7 @@ export default function HomeScreen({
           activeOpacity={0.75}
           onPress={handleOpenDashboardPress}
         >
-          <Text style={styles.navLoginText}>Dashboard</Text>
+          <Text style={styles.navLoginText}>Sign In</Text>
         </TouchableOpacity>
       </View>
 
@@ -72,7 +72,7 @@ export default function HomeScreen({
             Never lose track of money lent to friends.
           </Text>
 
-          {/* Primary Action Button: Open Dashboard */}
+          {/* Primary Action Button: Get Started */}
           <TouchableOpacity
             style={[styles.openDashboardBtn, checkingAuth && styles.btnDisabled]}
             activeOpacity={0.85}
@@ -82,7 +82,7 @@ export default function HomeScreen({
             {checkingAuth ? (
               <ActivityIndicator color="#FFFFFF" size="small" />
             ) : (
-              <Text style={styles.openDashboardBtnText}>Open Dashboard</Text>
+              <Text style={styles.openDashboardBtnText}>Get Started</Text>
             )}
           </TouchableOpacity>
 
@@ -126,47 +126,6 @@ export default function HomeScreen({
                 <Text style={styles.previewStatLabel}>Active Friends</Text>
                 <Text style={styles.previewStatVal}>4</Text>
               </View>
-            </View>
-          </View>
-        </View>
-
-        {/* 3 Core Highlights */}
-        <View style={styles.featuresSection}>
-          <Text style={styles.sectionTitle}>Everything you need</Text>
-
-          <View style={styles.featureCard}>
-            <View style={[styles.featureIconBox, { backgroundColor: '#EDE9FE' }]}>
-              <Text style={styles.featureIcon}>📱</Text>
-            </View>
-            <View style={styles.featureTextCol}>
-              <Text style={styles.featureTitle}>Phone OTP Sign In</Text>
-              <Text style={styles.featureDesc}>
-                Instant access with your 10-digit Indian phone number and a secure 6-digit mock OTP.
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.featureCard}>
-            <View style={[styles.featureIconBox, { backgroundColor: '#D1FAE5' }]}>
-              <Text style={styles.featureIcon}>📊</Text>
-            </View>
-            <View style={styles.featureTextCol}>
-              <Text style={styles.featureTitle}>Executive Balance Tracker</Text>
-              <Text style={styles.featureDesc}>
-                Real-time metrics for total lent, repayments collected, outstanding balances, and overdue alerts.
-              </Text>
-            </View>
-          </View>
-
-          <View style={styles.featureCard}>
-            <View style={[styles.featureIconBox, { backgroundColor: '#FEF3C7' }]}>
-              <Text style={styles.featureIcon}>🤝</Text>
-            </View>
-            <View style={styles.featureTextCol}>
-              <Text style={styles.featureTitle}>Partial & Full Settlements</Text>
-              <Text style={styles.featureDesc}>
-                Record repayments easily with automatic status updates and overpayment safeguards.
-              </Text>
             </View>
           </View>
         </View>

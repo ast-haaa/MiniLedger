@@ -268,6 +268,7 @@ export default function DashboardScreen({
 
             {/* VIBRANT ROYAL HERO CARD */}
             <View style={styles.heroCard}>
+              <View style={styles.heroAuraBlob} />
               <View style={styles.heroTopRow}>
                 <Text style={styles.heroLabel}>TOTAL OUTSTANDING</Text>
                 {summary && summary.overdue > 0 ? (
@@ -475,17 +476,30 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     flex: 1,
   },
-  /* VIBRANT LIGHT VIOLET HERO CARD */
+  /* VIBRANT ROYAL HERO CARD */
   heroCard: {
-    backgroundColor: '#9061F9', // Modern lighter vibrant violet
+    backgroundColor: '#8B5CF6', // Vibrant luminous royal iris violet
     borderRadius: 24,
     padding: 22,
-    shadowColor: '#9061F9',
+    shadowColor: '#7C3AED',
     shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.28,
     shadowRadius: 20,
     elevation: 8,
     marginBottom: 16,
+    overflow: 'hidden',
+    position: 'relative',
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.25)',
+  },
+  heroAuraBlob: {
+    position: 'absolute',
+    top: -40,
+    right: -40,
+    width: 140,
+    height: 140,
+    borderRadius: 70,
+    backgroundColor: 'rgba(255, 255, 255, 0.12)',
   },
   heroTopRow: {
     flexDirection: 'row',
@@ -496,8 +510,8 @@ const styles = StyleSheet.create({
   heroLabel: {
     fontSize: 11,
     fontWeight: '800',
-    color: '#2E1065', // Deep dark royal violet
-    letterSpacing: 1,
+    color: '#EDE9FE', // Soft luminous lilac
+    letterSpacing: 1.2,
   },
   overdueBadge: {
     backgroundColor: '#FFF1F2',
@@ -514,9 +528,9 @@ const styles = StyleSheet.create({
     letterSpacing: 0.5,
   },
   heroAmount: {
-    fontSize: 34,
+    fontSize: 36,
     fontWeight: '900',
-    color: '#0F172A', // Deep dark navy/black
+    color: '#FFFFFF', // Luminous crisp white
     letterSpacing: -1,
     marginBottom: 16,
   },
@@ -525,14 +539,14 @@ const styles = StyleSheet.create({
   },
   progressTrack: {
     height: 6,
-    backgroundColor: 'rgba(0, 0, 0, 0.12)',
+    backgroundColor: 'rgba(255, 255, 255, 0.22)',
     borderRadius: 3,
     overflow: 'hidden',
     marginBottom: 8,
   },
   progressBarFill: {
     height: '100%',
-    backgroundColor: '#059669', // Rich dark emerald
+    backgroundColor: '#34D399', // Fresh vivid emerald
     borderRadius: 3,
   },
   progressLabelRow: {
@@ -543,47 +557,48 @@ const styles = StyleSheet.create({
   progressText: {
     fontSize: 12,
     fontWeight: '800',
-    color: '#064E3B', // Dark forest green
+    color: '#A7F3D0', // Mint accent
   },
   progressSubtext: {
     fontSize: 12,
-    color: '#2E1065', // Deep dark violet
-    fontWeight: '700',
+    color: '#EDE9FE',
+    fontWeight: '600',
   },
   heroStatsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.75)',
-    borderRadius: 14,
-    paddingVertical: 12,
+    backgroundColor: 'rgba(255, 255, 255, 0.16)', // Frosted glass container
+    borderRadius: 16,
+    paddingVertical: 13,
     paddingHorizontal: 16,
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.5)',
+    borderColor: 'rgba(255, 255, 255, 0.22)',
   },
   heroStatItem: {
     flex: 1,
   },
   statSubLabel: {
     fontSize: 11,
-    color: '#4B5563', // Dark slate grey
+    color: '#EDE9FE',
     fontWeight: '700',
     marginBottom: 2,
+    letterSpacing: 0.3,
   },
   repaidLabel: {
-    color: '#065F46', // Dark emerald
+    color: '#A7F3D0',
   },
   statValue: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '800',
-    color: '#0F172A', // Deep dark navy/black
+    color: '#FFFFFF',
   },
   repaidStatValue: {
-    color: '#047857', // Dark emerald
+    color: '#A7F3D0',
   },
   statDivider: {
     width: 1,
-    height: 24,
-    backgroundColor: 'rgba(0, 0, 0, 0.12)',
+    height: 26,
+    backgroundColor: 'rgba(255, 255, 255, 0.22)',
     marginHorizontal: 12,
   },
   /* ACTION BUTTON */
