@@ -11,6 +11,7 @@ import {
   Platform,
   SafeAreaView,
   StatusBar,
+  Image,
 } from 'react-native';
 import { createLoan } from '../src/api';
 
@@ -24,6 +25,8 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
   const [amount, setAmount] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [notes, setNotes] = useState('');
+  const [receiptImage, setReceiptImage] = useState<string | null>(null);
+  const [receiptFileName, setReceiptFileName] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -38,6 +41,27 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
     future.setDate(future.getDate() + days);
     setDueDate(formatDateToIso(future));
     setError(null);
+  };
+
+  // Handle Receipt photo selection (Bonus feature)
+  const handlePickReceipt = () => {
+    if (Platform.OS === 'web' && typeof document !== 'undefined') {
+      const fileInput = document.createElement('input');
+      fileInput.type = 'file';
+      fileInput.accept = 'image/*';
+      fileInput.onchange = (e: any) => {
+        const file = e.target?.files?.[0];
+        if (file) {
+          setReceiptFileName(file.name);
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            setReceiptImage(event.target?.result as string);
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      fileInput.click();
+    }
   };
 
   const handleSaveLoan = async () => {
@@ -67,11 +91,18 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
 
     try {
       setLoading(true);
+      const combinedNotes = [
+        notes ? notes.trim() : null,
+        receiptFileName ? `[Receipt: ${receiptFileName}]` : null,
+      ]
+        .filter(Boolean)
+        .join(' • ');
+
       await createLoan({
         friendName: friendName.trim(),
         amount: numAmount,
         dueDate: parsedDate.toISOString(),
-        notes: notes ? notes.trim() : undefined,
+        notes: combinedNotes || undefined,
       });
       onSuccess();
     } catch (err: any) {
@@ -191,6 +222,36 @@ export default function AddLoanScreen({ onBack, onSuccess }: AddLoanScreenProps)
               value={notes}
               onChangeText={setNotes}
             />
+
+            {/* Receipt Photo Upload (Bonus) */}
+            <Text style={styles.inputLabel}>RECEIPT PHOTO (OPTIONAL BONUS)</Text>
+            {receiptImage ? (
+              <View style={styles.receiptPreviewBox}>
+                <Image source={{ uri: receiptImage }} style={styles.receiptThumbnail} />
+                <View style={styles.receiptInfo}>
+                  <Text style={styles.receiptFileName} numberOfLines={1}>
+                    {receiptFileName || 'Receipt Attached'}
+                  </Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      setReceiptImage(null);
+                      setReceiptFileName(null);
+                    }}
+                  >
+                    <Text style={styles.removeReceiptText}>Remove</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            ) : (
+              <TouchableOpacity
+                style={styles.uploadReceiptBtn}
+                activeOpacity={0.75}
+                onPress={handlePickReceipt}
+              >
+                <Text style={styles.uploadReceiptIcon}>📷</Text>
+                <Text style={styles.uploadReceiptText}>Attach Receipt Photo</Text>
+              </TouchableOpacity>
+            )}
 
             {/* Save Button */}
             <TouchableOpacity
@@ -410,5 +471,59 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#FFFFFF',
     letterSpacing: 0.2,
+  },
+  uploadReceiptBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#F3E8FF',
+    borderWidth: 1.5,
+    borderColor: '#DDD6FE',
+    borderStyle: 'dashed',
+    borderRadius: 14,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    marginBottom: 18,
+  },
+  uploadReceiptIcon: {
+    fontSize: 18,
+    marginRight: 8,
+  },
+  uploadReceiptText: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#7E4BD6',
+  },
+  receiptPreviewBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FAF5FF',
+    borderWidth: 1,
+    borderColor: '#E9D5FF',
+    borderRadius: 14,
+    padding: 10,
+    marginBottom: 18,
+  },
+  receiptThumbnail: {
+    width: 48,
+    height: 48,
+    borderRadius: 8,
+    backgroundColor: '#EDE9FE',
+  },
+  receiptInfo: {
+    flex: 1,
+    marginLeft: 12,
+    justifyContent: 'center',
+  },
+  receiptFileName: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#1E1B4B',
+    marginBottom: 2,
+  },
+  removeReceiptText: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: '#DC2626',
   },
 });

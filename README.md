@@ -21,9 +21,10 @@ Clean and minimal file layout with zero unnecessary abstractions:
 miniledger/
 ├── mobile/
 │   ├── app/
+│   │   ├── home.tsx                   # Landing page (Brand hero & Open Dashboard gate)
 │   │   ├── index.tsx                  # Login screen (Phone & 6-digit mock OTP)
-│   │   ├── dashboard.tsx              # 4 Summary cards & loan list with overdue highlights
-│   │   ├── add-loan.tsx               # Add loan form with quick due date presets
+│   │   ├── dashboard.tsx              # Executive summary & loan list with overdue highlights
+│   │   ├── add-loan.tsx               # Add loan form with presets & receipt photo upload (Bonus)
 │   │   └── loan-details.tsx           # Breakdown, partial/full repayments, overpayment prevention
 │   ├── src/
 │   │   ├── types/
@@ -178,3 +179,29 @@ cd server
 npm test
 ```
 Result: **14 passed, 14 total**.
+
+---
+
+## 🎁 Bonus Features Implemented
+
+1. **Receipt Photo Attachment**: In the *Add Loan* screen, users can attach a photo of their paper or digital receipt. The receipt image is previewed with remove/replace capabilities and stored with the loan record.
+2. **Comprehensive Input Validation**: Robust validation covering:
+   - 10-digit Indian mobile number validation (`+91`)
+   - 6-digit OTP code validation with max-attempt throttling (5 attempts)
+   - Friend name non-empty check
+   - Positive monetary amount validation
+   - Valid due date parsing
+   - Strict overpayment prevention (rejecting repayments greater than outstanding balance)
+3. **Automated Test Suite**: 14 Jest integration tests with 100% pass rate.
+
+---
+
+## 📹 2–3 Minute Demo Video Walkthrough Guide
+
+To record your submission video (using [Loom](https://www.loom.com/) or any screen recorder):
+1. **Landing Page (0:00 - 0:30)**: Show the Home page with the MiniLedger logo and click **"Open Dashboard"**.
+2. **Phone OTP Login (0:30 - 1:00)**: Enter a 10-digit mobile number, click **"Send Verification Code"**, show the mock OTP printed in the backend server terminal, enter it, and click **"Verify & Continue"**.
+3. **Dashboard & Add Loan (1:00 - 1:45)**: View the executive summary card. Click **"+ Record New Loan"**, enter a friend name, amount, pick a due date preset, attach a receipt photo (bonus), and click **"Confirm & Save Loan"**.
+4. **Repayments & Auto-Settlement (1:45 - 2:30)**: Click on the newly created loan, record a partial repayment, observe the balance drop, and then record the remaining balance to demonstrate the loan dynamically transitioning to `REPAID`.
+5. **Session & Security (2:30 - 2:50)**: Tap the brand logo to return to Home, click **"Open Dashboard"** to show instant authenticated entry, and tap **"Sign Out"** to show secure session termination.
+

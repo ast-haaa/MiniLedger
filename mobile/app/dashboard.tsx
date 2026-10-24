@@ -307,14 +307,14 @@ export default function DashboardScreen({
               {/* Bottom stats row */}
               <View style={styles.heroStatsRow}>
                 <View style={styles.heroStatItem}>
-                  <Text style={styles.statSubLabel}>Total Lent ↗</Text>
+                  <Text style={styles.statSubLabel}>Total Lent</Text>
                   <Text style={styles.statValue}>
                     ₹{(summary?.totalLent || 0).toLocaleString('en-IN')}
                   </Text>
                 </View>
                 <View style={styles.statDivider} />
                 <View style={styles.heroStatItem}>
-                  <Text style={[styles.statSubLabel, styles.repaidLabel]}>Repaid ↙</Text>
+                  <Text style={[styles.statSubLabel, styles.repaidLabel]}>Repaid</Text>
                   <Text style={[styles.statValue, styles.repaidStatValue]}>
                     ₹{(summary?.totalRepaid || 0).toLocaleString('en-IN')}
                   </Text>
@@ -496,7 +496,7 @@ const styles = StyleSheet.create({
   heroLabel: {
     fontSize: 11,
     fontWeight: '800',
-    color: '#DDD6FE',
+    color: '#2E1065', // Deep dark royal violet
     letterSpacing: 1,
   },
   overdueBadge: {
@@ -516,7 +516,7 @@ const styles = StyleSheet.create({
   heroAmount: {
     fontSize: 34,
     fontWeight: '900',
-    color: '#FFFFFF',
+    color: '#0F172A', // Deep dark navy/black
     letterSpacing: -1,
     marginBottom: 16,
   },
@@ -525,14 +525,14 @@ const styles = StyleSheet.create({
   },
   progressTrack: {
     height: 6,
-    backgroundColor: 'rgba(255, 255, 255, 0.25)',
+    backgroundColor: 'rgba(0, 0, 0, 0.12)',
     borderRadius: 3,
     overflow: 'hidden',
     marginBottom: 8,
   },
   progressBarFill: {
     height: '100%',
-    backgroundColor: '#34D399', // Emerald
+    backgroundColor: '#059669', // Rich dark emerald
     borderRadius: 3,
   },
   progressLabelRow: {
@@ -543,45 +543,47 @@ const styles = StyleSheet.create({
   progressText: {
     fontSize: 12,
     fontWeight: '800',
-    color: '#A7F3D0',
+    color: '#064E3B', // Dark forest green
   },
   progressSubtext: {
     fontSize: 12,
-    color: '#DDD6FE',
-    fontWeight: '500',
+    color: '#2E1065', // Deep dark violet
+    fontWeight: '700',
   },
   heroStatsRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.14)',
+    backgroundColor: 'rgba(255, 255, 255, 0.75)',
     borderRadius: 14,
     paddingVertical: 12,
     paddingHorizontal: 16,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 255, 255, 0.5)',
   },
   heroStatItem: {
     flex: 1,
   },
   statSubLabel: {
     fontSize: 11,
-    color: '#EDE9FE',
-    fontWeight: '600',
+    color: '#4B5563', // Dark slate grey
+    fontWeight: '700',
     marginBottom: 2,
   },
   repaidLabel: {
-    color: '#A7F3D0',
+    color: '#065F46', // Dark emerald
   },
   statValue: {
     fontSize: 16,
     fontWeight: '800',
-    color: '#FFFFFF',
+    color: '#0F172A', // Deep dark navy/black
   },
   repaidStatValue: {
-    color: '#A7F3D0',
+    color: '#047857', // Dark emerald
   },
   statDivider: {
     width: 1,
     height: 24,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    backgroundColor: 'rgba(0, 0, 0, 0.12)',
     marginHorizontal: 12,
   },
   /* ACTION BUTTON */

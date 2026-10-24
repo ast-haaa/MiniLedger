@@ -68,18 +68,8 @@ export default function HomeScreen({
       >
         {/* Hero Section */}
         <View style={styles.heroSection}>
-          <View style={styles.badgePill}>
-            <View style={styles.badgeDot} />
-            <Text style={styles.badgeText}>PEER LENDING SIMPLIFIED</Text>
-          </View>
-
           <Text style={styles.heroHeadline}>
             Never lose track of money lent to friends.
-          </Text>
-
-          <Text style={styles.heroSubtext}>
-            Clean balances, automated due date tracking, and instant settlement
-            records — without the awkward reminder texts.
           </Text>
 
           {/* Primary Action Button: Open Dashboard */}
@@ -92,12 +82,7 @@ export default function HomeScreen({
             {checkingAuth ? (
               <ActivityIndicator color="#FFFFFF" size="small" />
             ) : (
-              <View style={styles.btnContentRow}>
-                <Text style={styles.openDashboardBtnText}>Open Dashboard</Text>
-                <View style={styles.btnArrowBadge}>
-                  <Text style={styles.btnArrowText}>→</Text>
-                </View>
-              </View>
+              <Text style={styles.openDashboardBtnText}>Open Dashboard</Text>
             )}
           </TouchableOpacity>
 

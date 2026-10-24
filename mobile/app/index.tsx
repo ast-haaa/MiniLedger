@@ -132,7 +132,7 @@ export default function LoginScreen({ onSuccess, onNavigateHome }: LoginScreenPr
                     <Text style={styles.pillBadgeText}>DEV CODE</Text>
                   </View>
                   <Text style={styles.mockOtpCode}>{mockOtpHint}</Text>
-                  <Text style={styles.mockOtpAction}>Tap to auto-fill →</Text>
+                  <Text style={styles.mockOtpAction}>Tap to auto-fill</Text>
                 </TouchableOpacity>
               )}
 
