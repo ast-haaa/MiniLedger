@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
   },
   heroImageContainer: {
     width: '100%',
-    height: 190,
+    height: 220,
     borderRadius: 22,
     overflow: 'hidden',
     marginBottom: 20,
@@ -225,7 +225,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.16,
     shadowRadius: 18,
     elevation: 4,
-    backgroundColor: '#F5F3FF',
+    backgroundColor: '#FFFFFF',
   },
   heroImage: {
     width: '100%',
