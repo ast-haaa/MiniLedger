@@ -47,7 +47,7 @@ export default function HomeScreen({
       {/* Top Navbar */}
       <View style={styles.topBar}>
         <View style={styles.brandRow}>
-          <BrandLogo size={32} />
+          <BrandLogo size={34} />
           <View style={styles.brandTextCol}>
             <Text style={styles.brandTitle}>MiniLedger</Text>
             <Text style={styles.brandSub}>Peer Ledger</Text>
@@ -69,9 +69,6 @@ export default function HomeScreen({
       >
         {/* Balanced Centered Main Column */}
         <View style={styles.mainColumn}>
-          {/* Centered Brand Tag */}
-          <Text style={styles.brandKicker}>MiniLedger</Text>
-
           {/* Hero Headline */}
           <Text style={styles.heroHeadline}>
             Never lose track of money lent to friends.
@@ -150,7 +147,7 @@ export default function HomeScreen({
 
           {/* Footer */}
           <View style={styles.footer}>
-            <BrandLogo size={22} />
+            <BrandLogo size={24} />
             <Text style={styles.footerBrand}>MiniLedger</Text>
             <Text style={styles.footerText}>
               Built for seamless peer ledger tracking · Private & reliable
@@ -212,44 +209,36 @@ const styles = StyleSheet.create({
   scrollContent: {
     alignItems: 'center',
     paddingHorizontal: 16,
-    paddingTop: 10,
-    paddingBottom: 20,
+    paddingTop: 14,
+    paddingBottom: 22,
   },
   mainColumn: {
     width: '100%',
     maxWidth: 390,
     alignItems: 'center',
   },
-  brandKicker: {
-    fontSize: 12,
-    fontWeight: '700',
-    color: '#7E4BD6',
-    letterSpacing: 0.4,
-    marginBottom: 4,
-    textAlign: 'center',
-  },
   heroHeadline: {
-    fontSize: 21,
+    fontSize: 23,
     fontWeight: '900',
     color: '#0F172A',
     textAlign: 'center',
-    lineHeight: 27,
+    lineHeight: 29,
     letterSpacing: -0.5,
-    marginBottom: 6,
+    marginBottom: 8,
     maxWidth: 340,
   },
   heroDescription: {
-    fontSize: 13,
+    fontSize: 13.5,
     fontWeight: '500',
     color: '#64748B',
     textAlign: 'center',
-    lineHeight: 18,
-    marginBottom: 12,
+    lineHeight: 19,
+    marginBottom: 14,
     maxWidth: 330,
   },
   getStartedBtn: {
     width: '100%',
-    height: 46,
+    height: 48,
     backgroundColor: '#9061F9',
     borderRadius: 14,
     alignItems: 'center',
@@ -259,7 +248,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 10,
     elevation: 3,
-    marginBottom: 6,
+    marginBottom: 8,
   },
   btnDisabled: {
     opacity: 0.7,
@@ -271,18 +260,18 @@ const styles = StyleSheet.create({
     letterSpacing: 0.3,
   },
   heroNote: {
-    fontSize: 11,
+    fontSize: 11.5,
     color: '#94A3B8',
     fontWeight: '500',
     textAlign: 'center',
-    marginBottom: 12,
+    marginBottom: 14,
   },
   heroImageContainer: {
     width: '100%',
-    height: 165,
-    borderRadius: 16,
+    height: 180,
+    borderRadius: 18,
     overflow: 'hidden',
-    marginBottom: 12,
+    marginBottom: 14,
     borderWidth: 1,
     borderColor: '#E9D5FF',
     shadowColor: '#9061F9',
@@ -301,8 +290,8 @@ const styles = StyleSheet.create({
   previewCard: {
     width: '100%',
     backgroundColor: '#FFFFFF',
-    borderRadius: 16,
-    padding: 13,
+    borderRadius: 18,
+    padding: 15,
     borderWidth: 1,
     borderColor: '#EDE9FE',
     shadowColor: '#9061F9',
@@ -310,13 +299,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.06,
     shadowRadius: 10,
     elevation: 2,
-    marginBottom: 14,
+    marginBottom: 12,
   },
   previewHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginBottom: 6,
+    marginBottom: 8,
   },
   previewLabel: {
     fontSize: 10,
@@ -326,7 +315,7 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   previewAmount: {
-    fontSize: 22,
+    fontSize: 23,
     fontWeight: '900',
     color: '#0F172A',
     letterSpacing: -0.4,
@@ -350,14 +339,14 @@ const styles = StyleSheet.create({
   previewProgressTrack: {
     height: 5,
     backgroundColor: '#F3E8FF',
-    borderRadius: 2,
+    borderRadius: 3,
     overflow: 'hidden',
-    marginBottom: 8,
+    marginBottom: 10,
   },
   previewProgressFill: {
     height: '100%',
     backgroundColor: '#9061F9',
-    borderRadius: 2,
+    borderRadius: 3,
   },
   previewStatsRow: {
     flexDirection: 'row',
@@ -373,7 +362,7 @@ const styles = StyleSheet.create({
   },
   previewStatDivider: {
     width: 1,
-    height: 18,
+    height: 20,
     backgroundColor: '#E2E8F0',
   },
   previewStatLabel: {
@@ -390,7 +379,7 @@ const styles = StyleSheet.create({
   footer: {
     alignItems: 'center',
     paddingTop: 4,
-    paddingBottom: 16,
+    paddingBottom: 12,
     width: '100%',
   },
   footerBrand: {
