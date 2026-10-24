@@ -69,18 +69,17 @@ export default function HomeScreen({
       >
         {/* Balanced Centered Main Column */}
         <View style={styles.mainColumn}>
-          {/* Hero Illustration */}
-          <View style={styles.heroImageContainer}>
-            <Image
-              source={require('../assets/hero.jpg')}
-              style={styles.heroImage}
-              resizeMode="cover"
-            />
-          </View>
+          {/* Centered Brand Tag */}
+          <Text style={styles.brandKicker}>MiniLedger</Text>
 
-          {/* Hero Headline with 2-line optical balance */}
+          {/* Hero Headline */}
           <Text style={styles.heroHeadline}>
-            Never lose track of{'\n'}money lent to friends.
+            Never lose track of money lent to friends.
+          </Text>
+
+          {/* Short Description */}
+          <Text style={styles.heroDescription}>
+            Track every loan, repayment, and pending balance in one place.
           </Text>
 
           {/* Primary Action Button: Get Started */}
@@ -93,14 +92,23 @@ export default function HomeScreen({
             {checkingAuth ? (
               <ActivityIndicator color="#FFFFFF" size="small" />
             ) : (
-              <Text style={styles.getStartedBtnText}>Get Started</Text>
+              <Text style={styles.getStartedBtnText}>Get Started →</Text>
             )}
           </TouchableOpacity>
 
           {/* Trust Note */}
           <Text style={styles.heroNote}>
-            Fast phone login • Zero password hassle
+            Fast phone login · Zero password hassle
           </Text>
+
+          {/* Hero Illustration */}
+          <View style={styles.heroImageContainer}>
+            <Image
+              source={require('../assets/hero.jpg')}
+              style={styles.heroImage}
+              resizeMode="cover"
+            />
+          </View>
 
           {/* Live Preview Card */}
           <View style={styles.previewCard}>
@@ -108,6 +116,7 @@ export default function HomeScreen({
               <View>
                 <Text style={styles.previewLabel}>LIVE SUMMARY PREVIEW</Text>
                 <Text style={styles.previewAmount}>₹12,500</Text>
+                <Text style={styles.previewSubtext}>Total outstanding balance</Text>
               </View>
               <View style={styles.previewStatusChip}>
                 <Text style={styles.previewStatusText}>68% Settled</Text>
@@ -144,7 +153,7 @@ export default function HomeScreen({
             <BrandLogo size={26} />
             <Text style={styles.footerBrand}>MiniLedger</Text>
             <Text style={styles.footerText}>
-              Built for seamless peer ledger tracking • Private & reliable
+              Built for seamless peer ledger tracking · Private & reliable
             </Text>
           </View>
         </View>
@@ -212,24 +221,13 @@ const styles = StyleSheet.create({
     maxWidth: 400,
     alignItems: 'center',
   },
-  heroImageContainer: {
-    width: '100%',
-    height: 220,
-    borderRadius: 22,
-    overflow: 'hidden',
-    marginBottom: 20,
-    borderWidth: 1,
-    borderColor: '#E9D5FF',
-    shadowColor: '#9061F9',
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.16,
-    shadowRadius: 18,
-    elevation: 4,
-    backgroundColor: '#FFFFFF',
-  },
-  heroImage: {
-    width: '100%',
-    height: '100%',
+  brandKicker: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#7E4BD6',
+    letterSpacing: 0.4,
+    marginBottom: 10,
+    textAlign: 'center',
   },
   heroHeadline: {
     fontSize: 26,
@@ -238,7 +236,17 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     lineHeight: 34,
     letterSpacing: -0.6,
-    marginBottom: 18,
+    marginBottom: 10,
+    maxWidth: 360,
+  },
+  heroDescription: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: '#64748B',
+    textAlign: 'center',
+    lineHeight: 22,
+    marginBottom: 20,
+    maxWidth: 340,
   },
   getStartedBtn: {
     width: '100%',
@@ -268,7 +276,26 @@ const styles = StyleSheet.create({
     color: '#94A3B8',
     fontWeight: '500',
     textAlign: 'center',
-    marginBottom: 22,
+    marginBottom: 24,
+  },
+  heroImageContainer: {
+    width: '100%',
+    height: 250,
+    borderRadius: 22,
+    overflow: 'hidden',
+    marginBottom: 24,
+    borderWidth: 1,
+    borderColor: '#E9D5FF',
+    shadowColor: '#9061F9',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.14,
+    shadowRadius: 18,
+    elevation: 4,
+    backgroundColor: '#FFFFFF',
+  },
+  heroImage: {
+    width: '100%',
+    height: '100%',
   },
   previewCard: {
     width: '100%',
@@ -298,10 +325,16 @@ const styles = StyleSheet.create({
     marginBottom: 4,
   },
   previewAmount: {
-    fontSize: 24,
+    fontSize: 26,
     fontWeight: '900',
     color: '#0F172A',
     letterSpacing: -0.5,
+  },
+  previewSubtext: {
+    fontSize: 12,
+    color: '#64748B',
+    fontWeight: '500',
+    marginTop: 2,
   },
   previewStatusChip: {
     backgroundColor: '#D1FAE5',
