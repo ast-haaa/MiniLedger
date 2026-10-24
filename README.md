@@ -194,14 +194,5 @@ Result: **14 passed, 14 total**.
    - Strict overpayment prevention (rejecting repayments greater than outstanding balance)
 3. **Automated Test Suite**: 14 Jest integration tests with 100% pass rate.
 
----
 
-## 📹 2–3 Minute Demo Video Walkthrough Guide
-
-To record your submission video (using [Loom](https://www.loom.com/) or any screen recorder):
-1. **Landing Page (0:00 - 0:30)**: Show the Home page with the MiniLedger logo and click **"Open Dashboard"**.
-2. **Phone OTP Login (0:30 - 1:00)**: Enter a 10-digit mobile number, click **"Send Verification Code"**, show the mock OTP printed in the backend server terminal, enter it, and click **"Verify & Continue"**.
-3. **Dashboard & Add Loan (1:00 - 1:45)**: View the executive summary card. Click **"+ Record New Loan"**, enter a friend name, amount, pick a due date preset, attach a receipt photo (bonus), and click **"Confirm & Save Loan"**.
-4. **Repayments & Auto-Settlement (1:45 - 2:30)**: Click on the newly created loan, record a partial repayment, observe the balance drop, and then record the remaining balance to demonstrate the loan dynamically transitioning to `REPAID`.
-5. **Session & Security (2:30 - 2:50)**: Tap the brand logo to return to Home, click **"Open Dashboard"** to show instant authenticated entry, and tap **"Sign Out"** to show secure session termination.
 
